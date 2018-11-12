@@ -9,3 +9,6 @@ Repository of the GLG204 Project
 
 **Step 4**: Creating classes: Class diagrams, Converting classes to code, exploring object lifetime, using static or shared members. We will focus on what the classes do. Not just listing them as dumb data structures by focusing on the attributes.
 
+**Step 5**: Creating sequence diagrams, working with advanced UML diagrams, using UML Tools.
+
+
