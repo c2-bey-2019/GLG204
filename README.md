@@ -7,7 +7,7 @@ Repository of the GLG204 Project
 
 **Step 3**: Modeling the application: create a conceptual model, identify the classes and the relationships between them, What are the responsibilities of each class.
 
-**Step 4**: Creating classes: Class diagrams, Converting classes to code, exploring object lifetime, using static or shared members. We will focus on what the classes do. Not just listing them as dumb data structures by focusing on the attributes.
+**Step 4**: Creating classes: Class diagrams, Converting classes to code, exploring object lifetime, using static or shared members. We will focus on what the classes do. Not just listing them as dumb data structures by focusing on the attributes.(We will try to follow the SOLID and GRASP principles/guidelines).
 
 **Step 5**: Creating sequence diagrams, working with advanced UML diagrams, using UML Tools. We can check which tools allow us to generate code through UML Diagrams. Here's a list we can search in: https://en.wikipedia.org/wiki/List_of_Unified_Modeling_Language_tools
 
