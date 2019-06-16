@@ -11,4 +11,7 @@ Repository of the GLG204 Project
 
 **Step 5**: Creating sequence diagrams, working with advanced UML diagrams, using UML Tools. We can check which tools allow us to generate code through UML Diagrams. Here's a list we can search in: https://en.wikipedia.org/wiki/List_of_Unified_Modeling_Language_tools
 
+16/06/2019
+![alt text](https://cdn-images-1.medium.com/max/1000/1*46fQ4HaY4yDuyLU4MA6kqw.png)
+
 
