@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS CNAM_Attendance_DB;
+USE CNAM_Attendance_DB;
