@@ -11,6 +11,6 @@ The teacher will be able to view the students on a map while on their way to the
 ## Technologies Used
 
 ## Developed By
-..*Mazen Kabalan
-..*Mohamed Sabra
-..*Raymond Khawand
+..* Mazen Kabalan
+..* Mohamed Sabra
+..* Raymond Khawand
