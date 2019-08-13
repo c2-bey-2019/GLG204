@@ -1,6 +1,6 @@
 model/Attendance.class
 model/Person.class
+model/Registration.class
 model/Course.class
 model/Role.class
 model/Lecture.class
-model/Registration.class

@@ -1,18 +1,29 @@
 package model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 
+@Entity
+@Table(
+        name = "Lecture",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"course_course_id", "date"})
+)
+
 public class Lecture
 {
-
+    @OneToMany(mappedBy = "lecture", orphanRemoval = true)
     private List<Attendance> attendance;
 
+    @ManyToOne
     private Course course;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long lecture_id;
 
+    @Temporal(TemporalType.DATE)
     private Date date;
 
 

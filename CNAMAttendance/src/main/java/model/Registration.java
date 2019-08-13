@@ -1,12 +1,25 @@
 package model;
 
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(
+        name = "Registration",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"course_course_id", "person_person_id"})
+)
+
 public class Registration
 {
+    @ManyToOne
     private Course course;
 
+    @ManyToOne
     private Person person;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long registration_id;
 
     public Registration(Course course, Person person)

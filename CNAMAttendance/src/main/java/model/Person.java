@@ -1,24 +1,42 @@
 package model;
 
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
+@Entity
 public class Person
 {
+    @OneToMany(mappedBy = "person", orphanRemoval = true)
     private List<Registration> registration;
 
+    @OneToMany(mappedBy = "person", orphanRemoval = true)
     private List<Attendance> attendance;
 
+    @ManyToOne
+    @JoinColumn(nullable = false)
     private Role role;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long person_id;
 
+    @Column(nullable = false)
+    @Size(min = 2)
     private String firstName;
 
+    @Column(nullable = false)
+    @Size(min = 2)
     private String lastName;
 
+    @Column(unique = true, nullable = false)
+    @Size(min = 5)
     private String email;
 
+    @Column(nullable = false)
+    @Size(min = 6)
     private String passWord;
 
     public Person(String firstName, String lastName, String email, String passWord, Role role)

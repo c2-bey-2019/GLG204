@@ -1,12 +1,25 @@
 package model;
 
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(
+        name="Attendance",
+        uniqueConstraints = @UniqueConstraint(columnNames ={ "LECTURE_LECTURE_ID", "PERSON_PERSON_ID"})
+)
+
 public class Attendance
 {
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Person person;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Lecture lecture;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long attendance_id;
 
     private boolean present;

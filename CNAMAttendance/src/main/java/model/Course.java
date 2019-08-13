@@ -1,21 +1,25 @@
 package model;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 
-
+@Entity
 public class Course
 {
-
+    @OneToMany(mappedBy = "course", orphanRemoval=true)
     private List<Registration> registration;
 
-
+    @OneToMany(mappedBy = "course", orphanRemoval=true)
     private List<Lecture> lecture;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long course_id;
 
-
+    @Column(unique = true, nullable = false)
+    @Size(min = 3)
     private String courseName;
 
     public Course(String courseName)
