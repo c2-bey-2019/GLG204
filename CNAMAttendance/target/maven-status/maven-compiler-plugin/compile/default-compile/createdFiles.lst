@@ -1,5 +1,13 @@
+util/ISSAEUtil.class
+jpa/Person_.class
+jpa/Registration_.class
+ejb/LoginEjb.class
+jpa/Lecture_.class
+jpa/Attendance_.class
 jpa/Lecture.class
+jpa/Course_.class
 ejb/AttendanceEjb.class
+ctr/LoginBean.class
 ejb/LectureEjb.class
 jpa/Person.class
 ejb/PersonEjb.class
@@ -8,5 +16,6 @@ jpa/Role.class
 jpa/Registration.class
 ejb/CourseEjb.class
 ejb/RoleEjb.class
+jpa/Role_.class
 jpa/Course.class
 jpa/Attendance.class
