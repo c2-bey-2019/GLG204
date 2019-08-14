@@ -1,5 +1,4 @@
-package model;
-
+package jpa;
 
 import javax.persistence.*;
 
@@ -9,6 +8,14 @@ import javax.persistence.*;
         name = "Registration",
         uniqueConstraints = @UniqueConstraint(columnNames = {"course_course_id", "person_person_id"})
 )
+@NamedQueries({
+        @NamedQuery(
+                name = "selectAllRegistrations",
+                query = "SELECT r from Registration r"),
+        @NamedQuery(
+                name = "selectRegistration",
+                query = "SELECT r FROM Registration r WHERE r.course.course_id = ?1 AND r.person.person_id = ?2")
+})
 
 public class Registration
 {

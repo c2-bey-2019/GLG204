@@ -1,4 +1,4 @@
-package model;
+package jpa;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -6,6 +6,14 @@ import java.util.List;
 
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "selectAllCourses",
+                query = "SELECT c FROM Course c ORDER BY c.courseName"),
+        @NamedQuery(
+                name = "selectCourseName",
+                query = "SELECT c FROM Course c WHERE c.courseName LIKE :courseName ORDER BY c.courseName")})
+
 public class Course
 {
     @OneToMany(mappedBy = "course", orphanRemoval=true)

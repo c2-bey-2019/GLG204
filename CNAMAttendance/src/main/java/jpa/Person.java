@@ -1,5 +1,4 @@
-package model;
-
+package jpa;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -7,6 +6,21 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(
+                name = "selectAllPersons",
+                query = "SELECT p from Person p"),
+
+        @NamedQuery(
+                name = "selectPersonsByRoleId",
+                query = "SELECT p FROM Person p WHERE p.role.role_id = ?1 ORDER BY p.firstName"),
+
+        @NamedQuery(
+                name = "selectPerson",
+                query = "SELECT p from Person p where locate(:filt, p.email) > 0")
+}
+)
+
 public class Person
 {
     @OneToMany(mappedBy = "person", orphanRemoval = true)
