@@ -14,3 +14,6 @@ The teacher will be able to view the students on a map while on their way to the
 * Mazen Kabalan
 * Mohamed Sabra
 * Raymond Khawand
+
+## Developers Corner
+[Generating SSH Key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
