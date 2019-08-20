@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CNAM Etudiant</string>
+    <string name="app_name">CNAM Attendance</string>
     <!-- Strings related to login -->
     <string name="switch_text_on">Professeur</string>
     <string name="switch_text_off">Etudiant</string>
