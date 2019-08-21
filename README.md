@@ -14,3 +14,9 @@ The teacher will be able to view the students on a map while on their way to the
 * Mazen Kabalan
 * Mohamed Sabra
 * Raymond Khawand
+
+## Developers corner
+
+* To Solve the Authentication Required problem with Apache Tomcat in NetBeans IDE [click here](http://ohmjavaclasses.blogspot.com/2011/12/netbeans-problem-for-apache-tomcat.html)
+* Tomcat Installation Guide (Video Tutorial) [click here](https://youtu.be/pKMgr8uNvGM)
+
