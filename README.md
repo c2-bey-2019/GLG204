@@ -15,8 +15,8 @@ The teacher will be able to view the students on a map while on their way to the
 * Mohamed Sabra
 * Raymond Khawand
 
-## Developers corner
 
+## Developers corner
+* Generating SSH Key[click here](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 * To Solve the Authentication Required problem with Apache Tomcat in NetBeans IDE [click here](http://ohmjavaclasses.blogspot.com/2011/12/netbeans-problem-for-apache-tomcat.html)
 * Tomcat Installation Guide (Video Tutorial) [click here](https://youtu.be/pKMgr8uNvGM)
-
