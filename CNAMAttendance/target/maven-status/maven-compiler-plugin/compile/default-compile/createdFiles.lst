@@ -1,8 +1,14 @@
-util/ISSAEUtil.class
+util/ISSAE_Util.class
+ctr/AdminPanelBean.class
+ctr/RoleBean.class
 ejb/LoginEjb.class
+ctr/PersonBean.class
 jpa/Lecture.class
+ctr/LectureBean.class
+ctr/AttendanceBean.class
 ejb/AttendanceEjb.class
 ctr/LoginBean.class
+ctr/CourseBean.class
 ejb/LectureEjb.class
 jpa/Person.class
 ejb/PersonEjb.class
@@ -13,3 +19,4 @@ ejb/CourseEjb.class
 ejb/RoleEjb.class
 jpa/Course.class
 jpa/Attendance.class
+ctr/RegistrationBean.class

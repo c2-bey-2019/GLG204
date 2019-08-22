@@ -2,7 +2,7 @@ package ctr;
 
 import ejb.LoginEjb;
 import jpa.Person;
-import util.ISSAEUtil;
+import util.ISSAE_Util;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -61,10 +61,10 @@ public class LoginBean implements Serializable
 
     public String login() {
         if(getEmail().trim().length() <0){
-            ISSAEUtil.addErrorMessage("person_email","courrier peut pas etre vide!");
+            ISSAE_Util.addErrorMessage("person_email","courrier peut pas etre vide!");
         }
         if(getPassWord().trim().length() <0){
-            ISSAEUtil.addErrorMessage("person_password","mot de passe peut pas etre vide!");
+            ISSAE_Util.addErrorMessage("person_password","mot de passe peut pas etre vide!");
         }
         List<Person> persons = login.getPerson(getEmail());
         if(!persons.isEmpty()){

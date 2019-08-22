@@ -51,7 +51,7 @@ public class Attendance
         this.person = person;
         this.lecture = lecture;
         this.present = present;
-    }
+  }
 
     public Long getAttendance_id()
     {
@@ -87,9 +87,10 @@ public class Attendance
     {
         return present;
     }
-
+  
     public void setPresent(boolean present)
     {
         this.present = present;
+            
     }
 }

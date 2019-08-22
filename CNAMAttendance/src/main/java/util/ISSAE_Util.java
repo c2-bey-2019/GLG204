@@ -3,9 +3,9 @@ package util;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class ISSAEUtil {
+public class ISSAE_Util {
 
-    private ISSAEUtil(){}
+    private ISSAE_Util(){}
 
     public static void addErrorMessage(String id, String message){
 
