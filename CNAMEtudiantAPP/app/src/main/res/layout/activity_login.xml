@@ -92,6 +92,7 @@
         android:showText="true"
         android:textOff="@string/switch_text_off"
         android:textOn="@string/switch_text_on"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
