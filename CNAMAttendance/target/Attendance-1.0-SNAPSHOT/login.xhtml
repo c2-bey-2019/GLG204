@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+>
+<h:head>
+
+    <title>ISSAE Attendance Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <h:outputScript src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"/>
+    <h:outputScript src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+
+
+    <style type="text/css">
+        .form-signin {
+            margin: 0 auto;
+            max-width: 330px;
+            padding: 15px;
+        }
+    </style>
+
+
+</h:head>
+<h:body style="padding-top: 60px; background-color: #add;">
+    <b:container>
+        <h:form styleClass="form-signin" prependId="false">
+            <h2 class="form-signin-heading">Veuillez vous connecter</h2>
+
+            <b:inputText id="email" placeholder="Courrier" value="#{loginBean.email}">
+                <f:facet name="prepend">
+                    <b:icon name="user"/>
+                </f:facet>
+            </b:inputText>
+
+
+            <b:inputText id="password" placeholder="Mot de Passe" type="password" value="#{loginBean.passWord}">
+                <f:facet name="prepend">
+                    <b:iconAwesome name="key"/>
+                </f:facet>
+            </b:inputText>
+
+            <b:selectBooleanCheckbox value="true" caption="sauvegarder moi"/>
+            <b:commandButton look="primary btn-block" value="Se Connecter" icon="log-in" size="lg"
+                             action="#{loginBean.login}"/>
+            <b:navCommandLink value="Oublier Mot de Passe ?" action="#{loginBean.restorePassword}"></b:navCommandLink>
+        </h:form>
+    </b:container>
+</h:body>
+</html>
