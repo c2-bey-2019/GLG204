@@ -54,4 +54,31 @@ public class RegistrationEjb
 
     }
 
+    public List<Course> getCoursesByPerson(Long person_id)
+    {
+        List<Course> courses;
+        courses = em.createNamedQuery(
+                "selectCoursesByPersonId", Course.class)
+                .setParameter(1, person_id)
+                .getResultList();
+
+
+        return courses;
+
+    }
+
+    public List<Person> getPersonsByCourse(Long course_id, Long role_id)
+    {
+        List<Person> persons;
+        persons = em.createNamedQuery(
+                "selectPersonsByCourseId", Person.class)
+                .setParameter(1, course_id)
+                .setParameter(2, role_id)
+                .getResultList();
+
+
+        return persons;
+
+    }
+
 }
