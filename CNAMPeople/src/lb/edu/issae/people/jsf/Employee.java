@@ -10,6 +10,8 @@ public class Employee {
 	private String photo;
 	private String description;
 	
+	private String fullName;
+	
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
@@ -83,6 +85,20 @@ public class Employee {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public String getFullName() {
+		String fname = firstName + " " + lastName;
+		if (!degree.isEmpty()) {
+			fname +=", " + degree;
+		}
+		return fname;
+	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	

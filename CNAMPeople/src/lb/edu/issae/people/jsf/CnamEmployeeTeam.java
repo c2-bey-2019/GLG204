@@ -38,7 +38,7 @@ public class CnamEmployeeTeam implements Serializable {
 		Iterator<String> itr = line.iterator();
 		
 		while(itr.hasNext()) {
-			String[] data = line.toString().split(SEPARATOR);
+			String[] data = itr.next().toString().split(SEPARATOR);
 			int i = 0;
 			
 			employee = new Employee();
