@@ -1,4 +1,4 @@
-package com.hplus.sport.jsf;
+package lb.edu.issae.people.jsf;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;

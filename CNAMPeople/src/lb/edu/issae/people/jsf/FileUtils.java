@@ -1,4 +1,4 @@
-package com.hplus.sport.jsf;
+package lb.edu.issae.people.jsf;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class FileUtils {
 	private final String UPDATED_EMPLOYEES_FILE = "updated_employees.txt";
 
 	// Directories
-	final private String PROJECT_DIR 		=	"need to configure"; // C:\\Users\\Genesis\\workspace\\MyCRUDProject\\";
+	final private String PROJECT_DIR 		=	"C:\\Users\\User\\eclipse-workspace-oxygen\\CNAMPeople"; // C:\\Users\\Genesis\\workspace\\MyCRUDProject\\";
 	final private String SOURCES_DIR 		=	PROJECT_DIR + "sources\\";
 	final private String EMPLOYEES_IMG_DIR 	=	PROJECT_DIR + "WebContent\\images\\employees\\";
 
