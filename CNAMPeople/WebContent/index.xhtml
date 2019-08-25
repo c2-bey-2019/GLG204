@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+  <meta charset="UTF-8"/>
+  <title>CNAM PEOPLE</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<header id="home" class="header">
+  <nav class="nav" role="navigation">
+    <div class="container nav-elements">
+      <div class="branding">
+         <a href="#home"><img src="images/leCnamLibanLogo.svg" alt="Logo - Le Cnam Liban"/></a>
+      </div><!-- branding -->
+      <ul class="navbar">
+        <li><a href="#home">home</a></li>
+        <li><a href="#history">history</a></li>
+        <li><a href="#guarantee">Why CNAM?</a></li>
+        <li><a href="#people">people</a></li>
+          <h:panelGroup rendered="#{not empty admin}">
+        	<li>
+        		<h:form>
+        			<h:commandLink id="logout" value="logout" action="#{login.logout}"/>
+        		</h:form>
+        	</li>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{empty admin}">
+        	<li>
+        		<a href="login.xhtml">login</a>
+        	</li>
+        </h:panelGroup>
+      </ul><!-- navbar -->
+    </div><!-- container nav-elements -->
+  </nav>
+  <div class="container tagline">
+    <h1 class="headline">Our Mission</h1>
+    <p>We support and encourage <em>continuous and efficient</em> education, by offering <em>top-notch courses</em> and <em>up-to-date</em> Curriculum for a <em>performance-driven</em> engineer.</p>
+  </div><!-- container tagline -->
+</header><!-- #home -->
+
+<section id="history" class="section">
+  <div class="container">
+    <div class="text-content">
+      <h2 class="headline">CNAM HISTORY</h2>
+      <p>July 3, 1968: Decree of the Lebanese Republic (No. 10434) on "Constitution of an Institute at the Lebanese University - Institute of Applied and Economic Sciences which becomes in 2008 Higher Institute of Applied and Economic Sciences (ISSAE - Cnam Lebanon).<br/>
+      <br/>
+Article 3 of this decree: The present institute will operate according to a special agreement between: <br/>
+- Lebanese University<br/>
+- The National Conservatory of Arts and Crafts, Paris<br/>
+- The Lebanese Association for Scientific, Technical and Economic Education.<br/> 
+It will also have to be approved by the Minister of National Education and Fine Arts.<br/><br/>
+13 April 1973: Settlement Agreement between the Lebanese University, the Lebanese Association for Scientific Technical and Economic Education and CNAM setting the conditions under which the three institutions collaborate in the management of ISSAE (Institute Superior of Applied and Economic Sciences).<br/><br/>
+In 2011, nearly 4,000 auditors received instruction partly in French at ISSAE centers in BEIRUT, BAALBEK, BAAKLINE, TRIPOLI, BIKFAYA and GHAZA.<br/><br/>
+November 2011: Inauguration of the NAHR IBRAHIM center located in an industrial area.</p>
+    </div>
+  </div><!-- container text -->
+</section><!-- #history -->
+
+<section id="guarantee" class="section">
+  <header class="imageheader"></header>
+  <div class="container">
+    <h2 class="headline">Why CNAM?</h2>
+    <p>Training for all. <br/>
+		Compose your route à la carte.<br/>
+		Access a diploma.<br/>
+		To each according to his needs!<br/>
+		Realize your professional project.<br/>
+		Close to you.</p>
+  </div>
+</section><!-- guarantee -->
+
+<section id="people" class="section">
+  <header class="imageheader"></header>
+  <div class="container">
+    <h2 class="headline">People</h2>
+    <div class="people-cards">
+    
+    <ui:repeat var="employee" value="#{team.employeeList}">
+      <div class="person-card" id="employees-#{employee.firstName.toLowerCase()}#{employee.lastName.toLowerCase()}">
+        <img src="images/employees/#{employee.photo}" alt="#{employee.firstName}#{employee.lastName} Photo"/>
+        <div class="card-info">
+          <h3 class="card-name">#{employee.fullName}</h3>
+          <h4 class="card-title">#{employee.title}</h4>
+        </div>
+        <p class="card-text">#{employee.description}</p>
+      </div><!-- person-card -->
+     </ui:repeat> 
+     
+	</div><!-- people-cards -->
+  </div><!-- container -->
+</section><!-- people -->
+
+<footer class="footer">
+  <header class="imageheader"></header>
+  <div class="container">
+  <nav class="nav" role="navigation">
+    <div class="container nav-elements">
+      <div class="branding">
+        <a href="#home"><img src="images/leCnamLibanLogo.svg" alt="Logo - Le Cnam Liban"/></a>
+       <p class="address">Maurice Barres Street, Patriarcat <br/>
+       	Zokak El Blat, Beirut
+      </p>
+      </div>
+      <ul class="navbar">
+        <li><a href="#home">home</a></li>
+        <li><a href="#history">history</a></li>
+        <li><a href="#guarantee">Why CNAM?</a></li>
+        <li><a href="#people">people</a></li>
+      </ul>
+    </div>
+  </nav>
+<p class="legal">CNAM PEOPLE is a tool created by CNAM Students solely for the purpose of information. Information on this website can not be used as proof of Employment at CNAM. Please contact the administration for any reference check.</p></div><!-- container -->
+</footer><!-- footer -->
+
+</body>
+</html>

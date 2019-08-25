@@ -1,5 +1,7 @@
 package lb.edu.issae.people.jsf;
 
+import javax.servlet.http.Part;
+
 public class Employee {
 
 	private int ID;
@@ -9,6 +11,9 @@ public class Employee {
 	private String title;
 	private String photo;
 	private String description;
+	
+	private String fullName;
+	private Part uploadedFile;
 	
 	
 	public Employee() {
@@ -83,6 +88,30 @@ public class Employee {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+	public String getFullName() {
+		String fname = firstName + " " + lastName;
+		if (!degree.isEmpty()) {
+			fname +=", " + degree;
+		}
+		return fname;
+	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
+	public Part getUploadedFile() {
+		return uploadedFile;
+	}
+
+
+	public void setUploadedFile(Part uploadedFile) {
+		this.uploadedFile = uploadedFile;
 	}
 
 	

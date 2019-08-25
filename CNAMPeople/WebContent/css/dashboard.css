@@ -119,9 +119,9 @@ form label{
 
 .header {
 	background: -webkit-linear-gradient(top, rgba(0, 0, 0, .2),
-		rgba(0, 0, 0, .5)), url(../images/backgrounds/running.jpg);
+		rgba(0, 0, 0, .5)), url(../images/backgrounds/cnambanner.jpg);
 	background: linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)),
-		url(../images/backgrounds/running.jpg);
+		url(../images/backgrounds/cnambanner.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -150,9 +150,9 @@ form label{
 @media screen and (min-width:600px) {
 	.header {
 		background: -webkit-linear-gradient(top, rgba(0, 0, 0, .2),
-			rgba(0, 0, 0, .5)), url(../images/backgrounds/running.jpg);
+			rgba(0, 0, 0, .5)), url(../images/backgrounds/red-banner.png);
 		background: linear-gradient(180deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .5)),
-			url(../images/backgrounds/running.jpg);
+			url(../images/backgrounds/red-banner.png);
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -282,9 +282,9 @@ form label{
 	-ms-flex-align: end;
 	align-items: flex-end;
 	background: -webkit-linear-gradient(top, transparent, #312a10),
-		url(../images/backgrounds/cycling.jpg);
+		url(../images/backgrounds/chefdedep.jpg);
 	background: linear-gradient(180deg, transparent, #312a10),
-		url(../images/backgrounds/cycling.jpg);
+		url(../images/backgrounds/chefdedep.jpg);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
