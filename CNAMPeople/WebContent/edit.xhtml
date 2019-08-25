@@ -41,14 +41,16 @@
   
   <div class="container">
   	<h:form id="form" enctype="multipart/form-data">
-  		<h:panelGroup>
+  			<h:panelGroup>
   			<h:outputLabel for="firstName" value="First Name"/>
-  			<h:inputText id="firstName" value="#{team.employee.firstName}"/>  			
+  			<h:inputText id="firstName" value="#{team.employee.firstName}" required="true" requiredMessage="First name is required"/>
+  			<h:message for="firstName" style="color:red"/>  			
   		</h:panelGroup>
   		<br/>
   		<h:panelGroup>
   			<h:outputLabel for="lastName" value="Last Name"/>
-  			<h:inputText id="lastName" value="#{team.employee.lastName}"/>  			
+  			<h:inputText id="lastName" value="#{team.employee.lastName}" required="true" requiredMessage="Last name is required"/>  
+  			<h:message for="lastName" style="color:red"/>			
   		</h:panelGroup>
   		<br/>
   		<h:panelGroup>
@@ -58,12 +60,14 @@
   		<br/>
   		<h:panelGroup>
   			<h:outputLabel for="title" value="Title"/>
-  			<h:inputText id="title" value="#{team.employee.title}"/>  			
+  			<h:inputText id="title" value="#{team.employee.title}" required="true" requiredMessage="Title is required"/>  	
+  			<h:message for="title" style="color:red"/>		
   		</h:panelGroup>
   		<br/>
   		<h:panelGroup>
   			<h:outputLabel for="description" value="Description"/>
-  			<h:inputTextarea id="description" value="#{team.employee.description}"/>  			
+  			<h:inputTextarea id="description" value="#{team.employee.description}" required="true" requiredMessage="Description is required"/>  	
+  			<h:message for="description" style="color:red"/>		
   		</h:panelGroup>
   		<br/>
   		<h:panelGroup>
@@ -106,7 +110,8 @@
       </ul>
     </div>
   </nav>
-<p class="legal">CNAM PEOPLE is a tool created by CNAM Students solely for the purpose of information. Information on this website can not be used as proof of Employment at CNAM. Please contact the administration for any reference check.</p></div><!-- container -->
+<p class="legal">CNAM PEOPLE is a tool created by CNAM Students solely for the purpose of information. Information on this website can not be used as proof of Employment at CNAM. Please contact the administration for any reference check.</p>
+</div><!-- container -->
 </footer><!-- footer -->
 </body>
 </html>

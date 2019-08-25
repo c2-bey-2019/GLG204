@@ -7,7 +7,7 @@
 
 <head>
   <meta charset="UTF-8"/>
-  <title>CNAM PEOPLE</title>
+  <title>H+ Sport</title>
   <link rel="stylesheet" href="css/dashboard.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -32,24 +32,24 @@
  
  <section id="members" class="section"> 
   <div class="container tagline">
-    <h1 class="headline">Edit Employee Record</h1>
+    <h1 class="headline">Login</h1>
   </div><!-- container tagline -->
   
-  <h:messages style="color:red"/>
   
   <div class="container">
+  	<h:messages style="color:red"/>
   	<h:form id="form">
   		
   		<h:outputText value="Username"/>
-  		<h:inputText id="username" value="" required="true" requiredMessage="Username is required"/>
-  		<h:message for="username" style="color:red"/>
+  		<h:inputText id="username" value="#{login.username}" required="true" requiredMessage="Username is required"/>
+  		
   		<br/>
   		<h:outputText value="Password"/>
-  		<h:inputText id="password" value="" required="true" requiredMessage="Password is required"/>
-  		<h:message for="password" style="color:red"/>  		
+  		<h:inputSecret id="password" value="#{login.password}" required="true" requiredMessage="Password is required"/>
+  			
   		<br/>
   		<br/>
-  		<h:commandButton id="submit" value="Login"/>
+  		<h:commandButton id="submit" value="Login" action="#{login.validateLogin}"/>
   	
   	</h:form>
   
@@ -64,8 +64,8 @@
     <div class="container nav-elements">
       <div class="branding">
         <a href="#home"><img src="images/hpluslogo.svg" alt="Logo - H Plus Sports"/></a>
-        <p class="address">100 Main Street<br/>
-        Seattle, WA 98144
+       <p class="address">Maurice Barres Street, Patriarcat <br/>
+       	Zokak El Blat, Beirut
       </p>
       </div>
       <ul class="navbar">
@@ -77,7 +77,7 @@
       </ul>
     </div>
   </nav>
-  <p class="legal">H+ Sport is a fictitious brand created by lynda.com solely for the purpose of training. All products and people associated with H+ Sport are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+<p class="legal">CNAM PEOPLE is a tool created by CNAM Students solely for the purpose of information. Information on this website can not be used as proof of Employment at CNAM. Please contact the administration for any reference check.</p>
 </div><!-- container -->
 </footer><!-- footer -->
 </body>

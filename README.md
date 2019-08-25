@@ -10,7 +10,7 @@ The admin must be able to see the check-ins on a map in the application.
 
 ## Technologies Used
 
-## CNAM People (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
+##Extra Feature: CNAM People (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
 
 CNAM People is a Web Application that allows CNAM Administration to consolidate their employee information in one directory where they can easily add, edit, search and remove employees to always reflect the real number of people in the organization along with their current information.
 
@@ -22,9 +22,7 @@ IDE: Eclipse Eclipse (Oxygen) for Java EE Developers
 Java JDK :1.8
 Application Server: Apache Tomcat 9
 
-
-
-The teacher will be able to view the students on a map while on their way to the class and can generate attendance reports at the end of every event.
+Future plan: To add the teacher created in CNAM People to CNAM Attendan and vice versa.
 
 
 
