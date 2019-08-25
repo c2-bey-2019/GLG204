@@ -15,8 +15,7 @@ The admin must be able to see the check-ins on a map in the application.
 * Netbeans IDE 8.2
 
 ##Extra Feature: CNAM People (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
-
-[![Watch the video](https://www.youtube.com/upload_thumbnail?v=l4e7GhhKLfQ&t=hqdefault&ts=1566773355186)](https://youtu.be/l4e7GhhKLfQ)
+[![Watch the video](https://i9.ytimg.com/vi/l4e7GhhKLfQ/mq2.jpg?sqp=CPCljOsF&rs=AOn4CLCKY-AODT4LkQ1IJlA750HFO8Xmig)](https://youtu.be/l4e7GhhKLfQ)
 
 CNAM People is a Web Application that allows CNAM Administration to consolidate their employee information in one directory where they can easily add, edit, search and remove employees to always reflect the real number of people in the organization along with their current information.
 
