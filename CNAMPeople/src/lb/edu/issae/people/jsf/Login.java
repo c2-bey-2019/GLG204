@@ -38,6 +38,12 @@ public class Login implements Serializable{
 		
 	}
 	
+	public String logout() {
+		HttpSession session = SessionUtil.getSession();
+		session.invalidate();
+		return "index.xhtml?faces-redirected=true";
+	}
+	
 	public String validateLogin() {
 		
 		if(username.equals(ADMIN) && password.equals(PASS)) {

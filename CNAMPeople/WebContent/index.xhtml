@@ -16,7 +16,7 @@
   <nav class="nav" role="navigation">
     <div class="container nav-elements">
       <div class="branding">
-        <a href="#home"><img src="images/hpluslogo.svg" alt="Logo - H Plus Sports"/></a>
+         <a href="#home"><img src="images/leCnamLibanLogo.svg" alt="Logo - Le Cnam Liban"/></a>
       </div><!-- branding -->
       <ul class="navbar">
         <li><a href="#home">home</a></li>
@@ -24,6 +24,19 @@
         <li><a href="#products">products</a></li>
         <li><a href="#guarantee">guarantee</a></li>
         <li><a href="#people">people</a></li>
+          <h:panelGroup rendered="#{not empty admin}">
+        	<li>
+        		<h:form>
+        			<h:commandLink id="logout" value="logout" action="#{login.logout}"/>
+        		</h:form>
+        	</li>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{empty admin}">
+        	<li>
+        		<a href="login.xhtml">login</a>
+        	</li>
+        </h:panelGroup>
       </ul><!-- navbar -->
     </div><!-- container nav-elements -->
   </nav>
