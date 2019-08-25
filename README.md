@@ -9,6 +9,10 @@ The students, using a light mobile application, can see the classes and check-in
 The admin must be able to see the check-ins on a map in the application.
 
 ## Technologies Used
+* JAVA EE
+* JSF
+* MySQL
+* Netbeans IDE 8.2
 
 ##Extra Feature: CNAM People (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
 
@@ -22,9 +26,17 @@ IDE: Eclipse Eclipse (Oxygen) for Java EE Developers
 Java JDK :1.8
 Application Server: Apache Tomcat 9
 
-Future plan: To add the teacher created in CNAM People to CNAM Attendan and vice versa.
+Needs 1 more fine tuning related to the dashboard.
 
+For testing purpose, use the following credentials: Username: admin/Password: admin
 
+Currently image upload is moving the image to the images directory in the app server using java.io File features.
+Currently we are initializing the list of employees from a text file using java.io File features.
+
+Future development tasks: 
+Link the sign in to a back end database.
+Save the directory to a back end database including large objects for the photos.
+To add the teacher created in CNAM People to CNAM Attendance and vice versa.
 
 ## Developed By (listed in an alphabetical order)
 * Mazen Kabalan
