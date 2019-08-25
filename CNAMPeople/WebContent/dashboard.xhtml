@@ -34,7 +34,11 @@
   <div class="container tagline">
     <h1 class="headline">Dashboard</h1>
     
-    <h:link id="add" outcome="add" style="float:right;">Add a new Employee</h:link>
+    <h:form>
+    <h:commandLink id="add" action="#{team.response}" style="float:right;" actionListener="#{team.action}">Add a new employee
+    <f:attribute name="breadCrumb" value="add"/>
+    </h:commandLink>
+    </h:form>
     
   </div><!-- container tagline -->
   
@@ -82,8 +86,10 @@
     <h:column>
     <f:facet name="header">Actions</f:facet>
     <h:form id="edit-delete">
-    <h:commandButton id="edit" value="Edit" action="team.edit(employee)"></h:commandButton>
-    <h:commandButton id="delete" value="Delete" action="team.delete(employee)"></h:commandButton>
+    <h:commandButton id="edit" value="Edit" action="#{team.edit(employee)}" actionListener="#{team.action}">
+  		<f:attribute name="breadCrumb" value="edit"/>
+  		</h:commandButton>
+    <h:commandButton id="delete" value="Delete" action="#{team.delete(employee)}" onclick="if(confirm('Are you sure?')==false) return false;"></h:commandButton>
     </h:form>
     </h:column>
     
@@ -102,7 +108,7 @@
     <div class="container nav-elements">
       <div class="branding">
         <a href="#home"><img src="images/leCnamLibanLogo.svg" alt="Logo - Le Cnam Liban"/></a>
-        <p class="address">Maurice Barres Str., Patriarcat <br/>
+        <p class="address">Maurice Barres Street, Patriarcat <br/>
        	Zokak El Blat, Beirut
       </p>
       </div>
@@ -115,7 +121,7 @@
       </ul>
     </div>
   </nav>
-  <p class="legal">H+ Sport is a fictitious brand created by lynda.com solely for the purpose of training. All products and people associated with H+ Sport are also fictitious. Any resemblance to real brands, products, or people is purely coincidental. Information provided about the product is also fictitious and should not be construed to be representative of actual products on the market in a similar product category.</p>
+  <p class="legal">CNAM PEOPLE is a tool created by CNAM Students solely for the purpose of information. Information on this website can not be used as proof of Employment at CNAM. Please contact the administration for any reference check.</p>
 </div><!-- container -->
 </footer><!-- footer -->
 </body>

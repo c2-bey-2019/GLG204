@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.ActionEvent;
 
 @ManagedBean(name="team", eager=true)
 @SessionScoped
@@ -18,10 +19,15 @@ public class CnamEmployeeTeam implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private final String EMPLOYEES_FILE ="employees.txt";
 	private final String SEPARATOR =";";
+	private final int DEFAULT_ID = 1001;
 	
 	private Employee employee;
 	private List<Employee> employeeList = new ArrayList<Employee>();
 	private FileUtils file;
+	
+	private int lastEmployeeID;
+	private String breadCrumb;
+
 
 	public CnamEmployeeTeam() {
 		init();
@@ -31,6 +37,48 @@ public class CnamEmployeeTeam implements Serializable {
 		file =new FileUtils(EMPLOYEES_FILE,SEPARATOR);
 		setUpEmployeeList();
 	}
+	
+	public String response() {
+		return breadCrumb + "?faces-redirect=true";
+	}
+	
+	public void action(ActionEvent e) {
+		breadCrumb = (String)e.getComponent().getAttributes().get("breadCrumb");
+	}
+	
+	public String add() {	
+		if(employee.getUploadedFile()!=null) {
+			file.saveFile(employee.getUploadedFile());
+			employee.setPhoto(file.getUploadedFileName());
+		}
+		
+		int id = employeeList.isEmpty() ? DEFAULT_ID : getLastEmployeeID()+1;
+		employee.setID(id);
+		employeeList.add(employee);
+		
+		employee = new Employee();
+		return "dashboard.xhtml?faces-redirect=true";
+	}
+	
+	public String edit(Employee employee) {
+		this.employee = employee;
+		return "edit.xhtml?faces-redirect=true";
+	}
+	
+	public String saveEdit() {
+		if(employee.getUploadedFile()!=null) {
+			file.saveFile(employee.getUploadedFile());
+			employee.setPhoto(file.getUploadedFileName());
+		}
+		return "dashboard.xhtml?faces-redirect=true";
+		
+	}
+	
+	public String delete(Employee employee) {
+		employeeList.remove(employee);
+		return "dashboard.xhtml?faces-redirect=true";
+	}
+	
 	
 	public void setUpEmployeeList() {
 		List<String> line = file.getDataList();
@@ -88,6 +136,23 @@ public class CnamEmployeeTeam implements Serializable {
 
 	public void setFile(FileUtils file) {
 		this.file = file;
+	}
+
+	public int getLastEmployeeID() {
+		setLastEmployeeID();
+		return lastEmployeeID;
+	}
+
+	public void setLastEmployeeID() {
+		this.lastEmployeeID = employeeList.get(employeeList.size()-1).getID();
+	}
+
+	public String getBreadCrumb() {
+		return breadCrumb;
+	}
+
+	public void setBreadCrumb(String breadCrumb) {
+		this.breadCrumb = breadCrumb;
 	}
 
 }
