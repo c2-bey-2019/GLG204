@@ -46,7 +46,8 @@ Save the directory to a back end database including large objects for the photos
 
 To add the teacher created in CNAM People to CNAM Attendance and vice versa.
 
-## Developed By (listed in an alphabetical order)
+## Developed By
+###in an alphabetical order
 * Mazen Kabalan
 * Mohamed Sabra
 * Raymond Khawand
