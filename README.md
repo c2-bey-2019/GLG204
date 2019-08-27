@@ -41,9 +41,7 @@ Currently we are initializing the list of employees from a text file using java.
 Future development tasks: 
 
 Link the sign in to a back end database.
-
 Save the directory to a back end database including large objects for the photos.
-
 To add the teacher created in CNAM People to CNAM Attendance and vice versa.
 
 ## Developed By
