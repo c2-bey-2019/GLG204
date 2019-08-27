@@ -35,7 +35,7 @@ Needs 1 more fine tuning related to the dashboard.
 
 For testing purpose, use the following credentials: Username: admin/Password: admin
 
-Currently image upload is moving the image to the images directory in the app server using java.io File features.  return
+Currently image upload is moving the image to the images directory in the app server using java.io File features.  
 Currently we are initializing the list of employees from a text file using java.io File features.
 
 Future development tasks: 
