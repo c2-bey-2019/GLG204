@@ -14,7 +14,8 @@ The admin must be able to see the check-ins on a map in the application.
 * MySQL
 * Netbeans IDE 8.2
 
-##Extra Feature: CNAM People (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
+## Extra Feature: CNAM People 
+# (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
 
 Watch the Video!
 
