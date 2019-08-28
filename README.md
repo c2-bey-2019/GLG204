@@ -25,10 +25,10 @@ CNAM People is a Web Application that allows CNAM Administration to consolidate 
 
 CNAM People est une application Web qui permet à l’administration CNAM de regrouper les informations relatives à leurs employés dans un seul répertoire, leur permettant d’ajouter, d’éditer, de rechercher et de supprimer facilement des employés, afin de refléter en permanence le nombre réel de personnes dans l’organisation et leurs informations actuelles.
 
-Technologies Used:
-Framework: Java Server Faces (JSF) 2.0 (MVC design pattern)
-IDE: Eclipse Eclipse (Oxygen) for Java EE Developers
-Java JDK :1.8
+Technologies Used:  
+Framework: Java Server Faces (JSF) 2.0 (MVC design pattern)  
+IDE: Eclipse Eclipse (Oxygen) for Java EE Developers  
+Java JDK :1.8  
 Application Server: Apache Tomcat 9
 
 Needs 1 more fine tuning related to the dashboard.
