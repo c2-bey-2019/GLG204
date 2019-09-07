@@ -1,5 +1,6 @@
 package jpa;
 
+import java.text.SimpleDateFormat;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,8 @@ public class Lecture
 
     @Temporal(TemporalType.DATE)
     private Date date;
+    
+    
 
 
     public Lecture(Course course, Date date)
@@ -89,4 +92,12 @@ public class Lecture
     {
         this.course = course;
     }
+
+    public String getDateFormated()
+    {
+        SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");
+        return dt.format(this.date);
+    }
+    
+    
 }

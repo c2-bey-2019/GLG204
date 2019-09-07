@@ -40,6 +40,7 @@ public class Attendance
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long attendance_id;
 
+    @Column(nullable = true)
     private boolean present;
 
     public Attendance()
@@ -83,7 +84,8 @@ public class Attendance
         this.lecture = lecture;
     }
 
-    public boolean isPresent()
+
+    public boolean getPresent()
     {
         return present;
     }

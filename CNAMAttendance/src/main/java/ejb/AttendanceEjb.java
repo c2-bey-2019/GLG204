@@ -21,10 +21,20 @@ public class AttendanceEjb
         em.persist(a);
     }
 
-    public void markAttendance(Long attendance_id)
+    public void markAttendance(Long attendance_id, boolean pres)
     {
         Attendance a = em.find(Attendance.class, attendance_id);
-        a.setPresent(!a.isPresent());
+        
+        //em.getTransaction().begin(); 
+        a.setPresent(pres);
+        //em.getTransaction().commit();
+        em.merge(a);
+    }
+    public void markAttendance(Attendance a, boolean pres)
+    {
+        //em.getTransaction().begin(); 
+        a.setPresent(pres);
+        //em.getTransaction().commit();
         em.merge(a);
     }
 

@@ -76,13 +76,6 @@ public class AttendanceBean implements Serializable
         return "admin_panel?faces-redirect=true";
     }
 
-
-    public void merge(Long att_id)
-{
-
-    attEjb.markAttendance(att_id);
-}
-
     public Long getAttendance_id()
     {
         return attendance_id;
@@ -160,14 +153,21 @@ public class AttendanceBean implements Serializable
         return students;
     }
 
-    public boolean isPresent()
+    public boolean getPresent()
     {
         return present;
     }
 
-    public void setPresent(boolean present)
+    public void setPresent(Long att_id, boolean present)
     {
-        this.present = present;
+        attEjb.markAttendance(att_id,present);
+       
+    }
+    
+    public void setPresent(Attendance a, boolean present)
+    {
+        attEjb.markAttendance(a,present);
+       
     }
 
     public List<Person> getStudentsByCourse()

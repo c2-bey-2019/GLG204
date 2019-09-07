@@ -30,7 +30,7 @@
 
     <b:accordion expanded-panels="panel1,panel3">
 
-        <b:panel id="student" title="Étudiant" look="primary">
+        <b:panel id="student" title="Etudiant" look="primary">
 
 
             <h:form>
@@ -433,7 +433,7 @@
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférences"/></f:facet>
                         <a:repeat value="#{courseBean.getLecturesByCourse(courses.course_id)}" var="item">
-                            #{item.date}<br/>
+                            #{item.getDateFormated()}<br/>
                         </a:repeat> 
 
                     </b:column>
@@ -476,7 +476,7 @@
                                         <b:selectOneMenu id="lecture-picker" value="#{attendanceBean.lecture_id}">
                                             <f:selectItems value="#{lectureBean.lecturesByCourse}" var="leb"
                                                            itemValue="#{leb.lecture_id}"
-                                                           itemLabel="#{leb.date}"/>
+                                                           itemLabel="#{leb.getDateFormated()}"/>
                                         </b:selectOneMenu>
                                     </b:column>
 
@@ -517,7 +517,7 @@
                         
                         <b:commandButton value="#{studentAtt.present}"
                                          look="primary"
-                                         action="#{studentAtt.setPresent(!studentAtt.present)}"
+                                         action="#{attendanceBean.setPresent(studentAtt, !studentAtt.present)}"
                                          update="@form"/>
                     </h:column>
 
