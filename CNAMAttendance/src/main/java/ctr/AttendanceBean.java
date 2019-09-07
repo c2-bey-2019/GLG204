@@ -34,6 +34,7 @@ public class AttendanceBean implements Serializable
     private List<Person> studentsByLecture;
     private List<Attendance> studentsByAttendance;
     private List<Attendance> attendanceList;
+    private List<Attendance> studentAttendanceByCourse;
 
 
     @Inject
@@ -164,9 +165,9 @@ public class AttendanceBean implements Serializable
        
     }
     
-    public void setPresent(Attendance a, boolean present)
+    public void setPresent2(Attendance a, boolean present)
     {
-        attEjb.markAttendance(a,present);
+        attEjb.markAttendance2(a,present);
        
     }
 
@@ -204,4 +205,14 @@ public class AttendanceBean implements Serializable
     public void setAttendanceList(List<Attendance> attendanceList) {
         this.attendanceList = attendanceList;
     }
+
+    public List<Attendance> getStudentAttendanceByCourse() {
+        return studentAttendanceByCourse;
+    }
+
+    public void setStudentAttendanceByCourse(long pers_id) {
+        this.studentAttendanceByCourse = attEjb.getStudentAttendanceByCourse(10L, course_id, pers_id);
+    }
+    
+    
 }

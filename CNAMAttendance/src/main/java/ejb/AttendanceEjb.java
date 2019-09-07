@@ -30,7 +30,7 @@ public class AttendanceEjb
         //em.getTransaction().commit();
         em.merge(a);
     }
-    public void markAttendance(Attendance a, boolean pres)
+    public void markAttendance2(Attendance a, boolean pres)
     {
         //em.getTransaction().begin(); 
         a.setPresent(pres);
@@ -73,6 +73,20 @@ public class AttendanceEjb
         return attListBylecture;
     }
 
+    public List<Attendance> getStudentAttendanceByCourse(Long role_id, Long course_id, Long person_id)
+    {
+        List<Attendance> attListBylecture;
+        attListBylecture = em.createNamedQuery(
+                "selectStudentAttendanceByCourse", Attendance.class)
+                .setParameter(1, role_id)
+                .setParameter(2, course_id)
+                .setParameter(3, person_id)
+                .getResultList();
+        return attListBylecture;
+    }
+
+    
+    
     public List<Person> getStudentsByLecture(Long role_id, Long course_id, Long lecture_id)
     {
         List<Person> persons;

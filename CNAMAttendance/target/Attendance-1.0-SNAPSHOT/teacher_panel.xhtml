@@ -134,9 +134,9 @@
                     <h:column>
                         <f:facet name="header"><h:outputText value="Présent?"/></f:facet>
                         
-                        <b:commandButton value="#{studentAtt.getPresent()}"
+                        <b:commandButton value="#{studentAtt.getPresentFormated()}"
                                          look="primary"
-                                         action="#{attendanceBean.setPresent(studentAtt, !studentAtt.present)}"
+                                         action="#{attendanceBean.setPresent2(studentAtt, !studentAtt.present)}"
                                          update="@form"/>
                     </h:column>
 

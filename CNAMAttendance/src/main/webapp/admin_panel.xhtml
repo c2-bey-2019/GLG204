@@ -396,7 +396,7 @@
                                                   changeYear="true" changeMonth="true" required="true"/>
                                 </b:column>
                                 <b:column span="2">
-                                    <b:commandButton value="Sauvegarder"
+                                    <b:commandButton value="Ajouter"
                                                      actionListener="#{lectureBean.submit}" look="primary"
                                                      update="add-new-lecture"/>
                                 </b:column>
@@ -515,7 +515,7 @@
                     <h:column>
                         <f:facet name="header"><h:outputText value="Présent?"/></f:facet>
                         
-                        <b:commandButton value="#{studentAtt.present}"
+                        <b:commandButton value="#{studentAtt.getPresentFormated()}"
                                          look="primary"
                                          action="#{attendanceBean.setPresent(studentAtt, !studentAtt.present)}"
                                          update="@form"/>
