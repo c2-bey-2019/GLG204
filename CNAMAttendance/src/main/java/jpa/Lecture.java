@@ -45,13 +45,16 @@ public class Lecture
     @Temporal(TemporalType.DATE)
     private Date date;
     
+    @ManyToOne
+    private Period period;
     
 
 
-    public Lecture(Course course, Date date)
+    public Lecture(Course course, Date date, Period period)
     {
         this.course = course;
         this.date = date;
+        this.period = period;
     }
 
     public Lecture(Long lecture_id)
@@ -91,6 +94,14 @@ public class Lecture
     public void setCourse(Course course)
     {
         this.course = course;
+    }
+
+    public Period getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(Period period) {
+        this.period = period;
     }
 
     public String getDateFormated()

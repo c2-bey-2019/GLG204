@@ -11,6 +11,7 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import jpa.Period;
 
 @Named
 @SessionScoped
@@ -20,6 +21,7 @@ public class LectureBean implements Serializable
     private Course lectureCourse;
     private Course course;
     private Long course_id;
+    private String periodCode;
     private Long lecture_id;
     private List<Lecture> lectures;
     private List<Lecture> lecturesByCourse;
@@ -31,7 +33,7 @@ public class LectureBean implements Serializable
     public String submit()
     {
         try {
-            lecEjb.addLecture(new Lecture(new Course(getCourse_id()), getLectureDate()));
+            lecEjb.addLecture(new Lecture(new Course(getCourse_id()), getLectureDate(), new Period(getPeriodCode())));
         }
         catch (EJBException ejbe)
         {
@@ -102,6 +104,14 @@ public class LectureBean implements Serializable
     {
         lectures = lecEjb.getLectures();
         return lectures;
+    }
+
+    public String getPeriodCode() {
+        return periodCode;
+    }
+
+    public void setPeriodCode(String periodCode) {
+        this.periodCode = periodCode;
     }
 
     public List<Lecture> getLecturesByCourse()

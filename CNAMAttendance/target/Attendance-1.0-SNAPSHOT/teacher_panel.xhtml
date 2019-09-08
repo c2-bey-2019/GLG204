@@ -52,7 +52,7 @@
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférences"/></f:facet>
                         <a:repeat value="#{courseBean.getLecturesByCourse(courses.course_id)}" var="item">
-                            #{item.getDateFormated()}<br/>
+                            #{item.getDateFormated()} #{item.period.periodCode}<br/>
                         </a:repeat> 
 
                     </b:column>
@@ -95,7 +95,7 @@
                                         <b:selectOneMenu id="lecture-picker" value="#{attendanceBean.lecture_id}">
                                             <f:selectItems value="#{lectureBean.lecturesByCourse}" var="leb"
                                                            itemValue="#{leb.lecture_id}"
-                                                           itemLabel="#{leb.getDateFormated()}"/>
+                                                           itemLabel="#{leb.getDateFormated()} #{leb.period.periodCode}"/>
                                         </b:selectOneMenu>
                                     </b:column>
 
