@@ -48,13 +48,16 @@ public class Lecture
     @ManyToOne
     private Period period;
     
+    @ManyToOne
+    private Classroom classroom;
 
 
-    public Lecture(Course course, Date date, Period period)
+    public Lecture(Course course, Date date, Period period, Classroom classroom)
     {
         this.course = course;
         this.date = date;
         this.period = period;
+        this.classroom = classroom;
     }
 
     public Lecture(Long lecture_id)
@@ -104,6 +107,14 @@ public class Lecture
         this.period = period;
     }
 
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
+    }
+    
     public String getDateFormated()
     {
         SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy");

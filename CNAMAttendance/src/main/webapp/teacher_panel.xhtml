@@ -52,7 +52,7 @@
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférences"/></f:facet>
                         <a:repeat value="#{courseBean.getLecturesByCourse(courses.course_id)}" var="item">
-                            #{item.getDateFormated()} #{item.period.periodCode}<br/>
+                            #{item.getDateFormated()} #{item.period.periodCode} [#{item.classroom.classroomName}]<br/>
                         </a:repeat> 
 
                     </b:column>
@@ -70,7 +70,7 @@
                     <b:panel span="6" look="info" title="Choisissez un Cours">
                         <b:row>
                             <b:column medium-screen="2"><h:outputText value="Cours:"/></b:column>
-                            <b:column medium-screen="4">
+                            <b:column medium-screen="5">
                                 <b:selectOneMenu id="course-picker" value="#{lectureBean.course_id}">
                                     <f:selectItems value="#{personBean.getCourses(loginBean.personId)}" var="courses"
                                                    itemValue="#{courses.course_id}"
@@ -85,17 +85,17 @@
                         </b:row>
                     </b:panel>
 
-                    <b:panel span="6" look="info" title="Choisir la Date de la Conférence">
+                    <b:panel span="6" look="info" title="Choisir la Conférence">
 
                         <b:row>
                             <b:column>
                                 <b:row>
-                                    <b:column span="4"><h:outputText value="Date de la Conférence:"/></b:column>
-                                    <b:column span="4">
+                                    <b:column span="3"><h:outputText value="Conférence:"/></b:column>
+                                    <b:column span="5">
                                         <b:selectOneMenu id="lecture-picker" value="#{attendanceBean.lecture_id}">
                                             <f:selectItems value="#{lectureBean.lecturesByCourse}" var="leb"
                                                            itemValue="#{leb.lecture_id}"
-                                                           itemLabel="#{leb.getDateFormated()} #{leb.period.periodCode}"/>
+                                                           itemLabel="#{leb.getDateFormated()} #{leb.period.periodCode} [#{leb.classroom.classroomName}]"/>
                                         </b:selectOneMenu>
                                     </b:column>
 

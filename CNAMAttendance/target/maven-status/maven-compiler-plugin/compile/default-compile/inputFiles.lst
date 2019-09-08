@@ -1,10 +1,13 @@
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/AttendanceEjb.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Lecture.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/RegistrationBean.java
+/home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/ClassroomBean.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Course.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Attendance.java
+/home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/ClassroomEjb.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Person.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Role.java
+/home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Classroom.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/LectureBean.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/AdminPanelBean.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/PeriodEjb.java
