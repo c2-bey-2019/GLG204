@@ -38,6 +38,13 @@ public class AttendanceEjb
         em.merge(a);
     }
 
+    public void updateStudentLocation(Attendance a, double lat, double lng)
+    {
+        a.setLatitude(lat);
+        a.setLongitude(lng);
+        em.merge(a);
+    }
+
     public List<Person> getStudents(Long role_id)
     {
         List<Person> persons;

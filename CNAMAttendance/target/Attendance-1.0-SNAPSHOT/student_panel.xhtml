@@ -52,7 +52,7 @@
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférences"/></f:facet>
                         <a:repeat value="#{courseBean.getLecturesByCourse(courses.course_id)}" var="item">
-                            #{item.getDateFormated()} #{item.period.periodCode} [#{item.classroom.classroomName}]<br/>
+                            #{item.getDateFormated()} #{item.period.getPeriodDesc(item.date)} [#{item.classroom.classroomName}]<br/>
                         </a:repeat> 
 
                     </b:column>
@@ -88,7 +88,7 @@
                              rows="15">
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférence"/></f:facet>
-                        <h:outputText value="#{studentAtt.lecture.getDateFormated()} #{studentAtt.lecture.period.periodCode} [#{studentAtt.lecture.classroom.classroomName}]"/>
+                        <h:outputText value="[#{studentAtt.lecture.getDateFormated()}] [#{studentAtt.lecture.period.getPeriodDesc(studentAtt.lecture.date)}] [#{studentAtt.lecture.classroom.classroomName}]"/>
                     </b:column>
                     <b:column>
                         <f:facet name="header"><h:outputText value="Présent?"/></f:facet>

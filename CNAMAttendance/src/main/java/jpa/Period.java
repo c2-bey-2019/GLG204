@@ -1,5 +1,7 @@
 package jpa;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -60,6 +62,17 @@ public class Period
 
     public String getPeriodSaturday() {
         return periodSaturday;
+    }
+
+    public String getPeriodDesc(Date date) {
+        SimpleDateFormat simpleDateformat = new SimpleDateFormat("E"); // the day of the week abbreviated
+        System.out.println(simpleDateformat.format(date));
+
+        
+        if ("Sat".equals((String)simpleDateformat.format(date)))
+            return periodSaturday;
+        else
+            return periodMondayToFriday;
     }
 
     public void setPeriodCode(String periodCode) {

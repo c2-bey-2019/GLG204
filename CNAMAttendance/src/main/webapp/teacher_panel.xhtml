@@ -4,8 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://java.sun.com/jsf/facelets"
       xmlns:d="http://primefaces.org/ui"
       
@@ -18,6 +17,7 @@
 
 <h:head>
     <title>Renseignant</title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;key=AIzaSyC4VLUvLcI4PkGyc5FWbCc_vz-Bgu4la_g&amp;callback=initMap"></script>
 </h:head>
 
 <h:body style="padding-top: 60px; background-color: #add;">
@@ -52,7 +52,7 @@
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférences"/></f:facet>
                         <a:repeat value="#{courseBean.getLecturesByCourse(courses.course_id)}" var="item">
-                            #{item.getDateFormated()} #{item.period.periodCode} [#{item.classroom.classroomName}]<br/>
+                            [#{item.getDateFormated()}] [#{item.period.getPeriodDesc(item.date)}] [#{item.classroom.classroomName}]<br/>
                         </a:repeat> 
 
                     </b:column>
@@ -90,12 +90,12 @@
                         <b:row>
                             <b:column>
                                 <b:row>
-                                    <b:column span="3"><h:outputText value="Conférence:"/></b:column>
-                                    <b:column span="5">
+                                    <b:column span="2"><h:outputText value="Conférence:"/></b:column>
+                                    <b:column span="7">
                                         <b:selectOneMenu id="lecture-picker" value="#{attendanceBean.lecture_id}">
                                             <f:selectItems value="#{lectureBean.lecturesByCourse}" var="leb"
                                                            itemValue="#{leb.lecture_id}"
-                                                           itemLabel="#{leb.getDateFormated()} #{leb.period.periodCode} [#{leb.classroom.classroomName}]"/>
+                                                           itemLabel="[#{leb.getDateFormated()}] [#{leb.period.getPeriodDesc(leb.date)}] [#{leb.classroom.classroomName}]"/>
                                         </b:selectOneMenu>
                                     </b:column>
 
@@ -108,6 +108,15 @@
                                     </b:column>
                                 </b:row>
 
+                                <b:row>
+                                    <b:column span="3"/>
+                                   
+                                    <b:column span="5">
+                                        <b:commandButton value="  Afficher la localisation des étudiants sur Google Maps  " 
+                                                         look="primary"
+                                                         action="#{attendanceBean.showMap()}"/>
+                                    </b:column>
+                                </b:row>
 
                             </b:column>
                         </b:row>
@@ -142,8 +151,7 @@
 
 
                 </b:dataTable>
-
-
+                
             </h:form>
 
         </b:panel>

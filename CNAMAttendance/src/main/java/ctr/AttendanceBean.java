@@ -35,6 +35,8 @@ public class AttendanceBean implements Serializable
     private List<Attendance> studentsByAttendance;
     private List<Attendance> attendanceList;
     private List<Attendance> studentAttendanceByCourse;
+    private StudentsViewOnMap stuViewOnMap;
+
 
 
     @Inject
@@ -46,8 +48,15 @@ public class AttendanceBean implements Serializable
     @Inject
     private LectureEjb lecEjb;
 
+
+    
     public String submit()
     {
+        if (lecture_id == null)
+        {
+            return "";
+        };
+        
         //Injecting lecEjb to be able to get course_id through lecture_id
         setCourse_id(lecEjb.getCourse_id(lecture_id));
         attendanceList = new ArrayList<>();
@@ -189,7 +198,16 @@ public class AttendanceBean implements Serializable
     {
         return "attendance?faces-redirect=true";
     }
+    
+    public String returnToTeachersPage()
+    {
+        return "teacher_panel?faces-redirect=true";
+    }
 
+    public String showMap() {
+    // ...
+    return "/teacher_map.xhtml?faces-redirect=true";
+    }
 //    public List<Person> getStudentsByAttendance()
 //    {
 //
@@ -212,6 +230,17 @@ public class AttendanceBean implements Serializable
 
     public void setStudentAttendanceByCourse(long pers_id) {
         this.studentAttendanceByCourse = attEjb.getStudentAttendanceByCourse(10L, course_id, pers_id);
+    }
+
+    public StudentsViewOnMap getStuViewOnMap() {
+        this.submit();
+        this.stuViewOnMap = new StudentsViewOnMap();
+        this.stuViewOnMap.Refresh(this.getStudentsByAttendance());
+        return this.stuViewOnMap;
+    }
+
+    public void setStuViewOnMap(StudentsViewOnMap stuViewOnMap) {
+        this.stuViewOnMap = stuViewOnMap;
     }
     
     

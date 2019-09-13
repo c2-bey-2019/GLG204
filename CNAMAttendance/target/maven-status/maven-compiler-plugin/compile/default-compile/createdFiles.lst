@@ -13,6 +13,7 @@ ejb/RegistrationEjb.class
 ejb/CourseEjb.class
 jpa/Classroom.class
 jpa/Attendance.class
+ctr/CirclesView.class
 ctr/ClassroomBean.class
 ctr/RoleBean.class
 ejb/LoginEjb.class
@@ -20,6 +21,7 @@ ctr/PersonBean.class
 jpa/Period.class
 ctr/PeriodBean.class
 ejb/AttendanceEjb.class
+ctr/StudentsViewOnMap.class
 ejb/LectureEjb.class
 jpa/Role.class
 jpa/Registration.class
