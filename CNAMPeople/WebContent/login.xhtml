@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<head>
+  <meta charset="UTF-8"/>
+  <title>CNAM PEOPLE</title>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<header id="dashboard" class="header">
+  <nav class="nav" role="navigation">
+    <div class="container nav-elements">
+      <div class="branding">
+         <a href="index.xhtml#home"><img src="images/leCnamLibanLogo.svg" alt="Logo - Le Cnam Liban"/></a>
+      </div><!-- branding -->
+      <ul class="navbar">
+        <li><a href="index.xhtml#home">home</a></li>
+        <li><a href="index.xhtml#history">history</a></li>
+        <li><a href="#guarantee">Why CNAM?</a></li>
+        <li><a href="index.xhtml#people">people</a></li>
+          <h:panelGroup rendered="#{not empty admin}">
+        	<li>
+        		<h:form>
+        			<h:commandLink id="logout" value="logout" action="#{login.logout}"/>
+        		</h:form>
+        	</li>
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{empty admin}">
+        	<li>
+        		<a href="login.xhtml">login</a>
+        	</li>
+        </h:panelGroup>
+      </ul><!-- navbar -->
+    </div><!-- container nav-elements -->
+  </nav>
+ </header>
+ 
+ <section id="members" class="section"> 
+  <div class="container tagline">
+    <h1 class="headline">Login</h1>
+  </div><!-- container tagline -->
+  
+  
+  <div class="container">
+  	<h:messages style="color:red"/>
+  	<h:form id="form">
+  		
+  		<h:outputText value="Username"/>
+  		<h:inputText id="username" value="#{login.username}" required="true" requiredMessage="Username is required"/>
+  		
+  		<br/>
+  		<h:outputText value="Password"/>
+  		<h:inputSecret id="password" value="#{login.password}" required="true" requiredMessage="Password is required"/>
+  			
+  		<br/>
+  		<br/>
+  		<h:commandButton id="submit" value="Login" action="#{login.validateLogin}"/>
+  	
+  	</h:form>
+  
+  </div>
+</section>
+
+
+<footer class="footer">
+  <header class="imageheader"></header>
+  <div class="container">
+  <nav class="nav" role="navigation">
+    <div class="container nav-elements">
+      <div class="branding">
+        <a href="index.xhtml#home"><img src="images/leCnamLibanLogo.svg" alt="Logo - Le Cnam Liban"/></a>
+       <p class="address">Maurice Barres Street, Patriarcat <br/>
+       	Zokak El Blat, Beirut
+      </p>
+      </div>
+      <ul class="navbar">
+     <li><a href="index.xhtml#home">home</a></li>
+        <li><a href="index.xhtml#history">history</a></li>
+        <li><a href="#guarantee">Why CNAM?</a></li>
+        <li><a href="index.xhtml#people">people</a></li>
+      </ul>
+    </div>
+  </nav>
+<p class="legal">CNAM PEOPLE is a tool created by CNAM Students solely for the purpose of information. Information on this website can not be used as proof of Employment at CNAM. Please contact the administration for any reference check.</p>
+</div><!-- container -->
+</footer><!-- footer -->
+</body>
+</html>
