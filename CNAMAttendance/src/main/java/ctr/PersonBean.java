@@ -3,6 +3,7 @@ package ctr;
 import ejb.PersonEjb;
 import jpa.Person;
 import jpa.Role;
+import jpa.Course;
 
 import javax.ejb.EJBException;
 import javax.enterprise.context.SessionScoped;
@@ -23,6 +24,7 @@ public class PersonBean implements Serializable
     private List<Person> persons;
     private String fullName;
     private List<Person> personByRole;
+    private List<Course> courses;
 
     @Inject
     private PersonEjb persEjb;
@@ -118,6 +120,17 @@ public class PersonBean implements Serializable
     {
         personByRole = persEjb.getPersonsByRole(role_id);
         return personByRole;
+    }
+    
+    public List<Course> getCourses(Long person_id)
+    {
+        courses = persEjb.getCoursesByPerson(person_id);
+        return courses;
+    }
+    public void setCourses()
+    {
+        courses = persEjb.getCoursesByPerson(person_id);
+        
     }
 
 

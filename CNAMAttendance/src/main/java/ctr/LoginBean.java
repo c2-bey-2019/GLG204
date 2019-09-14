@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import jpa.Course;
 
 
 @Named
@@ -23,6 +24,7 @@ public class LoginBean implements Serializable
     private String email;
     private String passWord;
     private boolean isLoggedin;
+    private Long personId;
 
     @Inject
     private LoginEjb login;
@@ -48,6 +50,15 @@ public class LoginBean implements Serializable
     {
         this.email = email;
     }
+    public Long getPersonId()
+    {
+        return personId;
+    }
+
+    public void setPersonId(Long persId)
+    {
+        this.personId = persId;
+    }
 
     public String getPassWord()
     {
@@ -70,6 +81,8 @@ public class LoginBean implements Serializable
         if(!persons.isEmpty()){
             isLoggedin = true;
             Person person = persons.get(0);
+            personId = person.getPerson_id();
+            
             if(person.getPassWord().equals(passWord) && person.getRole().getRole_id() == 30)
                 return "admin_panel?faces-redirect=true";
             else if(person.getPassWord().equals(passWord) && person.getRole().getRole_id() == 20)
