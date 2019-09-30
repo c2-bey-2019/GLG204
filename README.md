@@ -10,9 +10,13 @@ The admin must be able to see the check-ins on a map in the application.
 
 ## Technologies Used
 * JAVA EE
-* JSF
+* Java Server Faces
+* Java Persistence API
 * MySQL
+* Javascript
+* RESTFul Web Services
 * Netbeans IDE 8.2
+* GlassFish Server 4
 
 ## Extra Feature: CNAM People 
 ### (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)

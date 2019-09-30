@@ -94,6 +94,18 @@
                         <f:facet name="header"><h:outputText value="Présent?"/></f:facet>
                         <h:outputText value="#{studentAtt.getPresentFormated()}"/>
                     </b:column>
+                    <b:column>
+                        <f:facet name="header"><h:outputText value="Vérification de la Présence"/></f:facet>
+                        <form action="student_checkin.html" method="GET">
+                            <input type="hidden" name="attId" value="#{studentAtt.getAttendance_id()}"/>
+                            <input type="hidden" name="lectureDate" value="#{studentAtt.lecture.getDateFormated()}"/>
+                            <input type="hidden" name="lecturePeriod" value="#{studentAtt.lecture.period.getPeriodDesc(studentAtt.lecture.date)}"/>
+                            <input type="hidden" name="lectureClass" value="#{studentAtt.lecture.classroom.classroomName}"/>
+                            <input type="hidden" name="course" value="#{studentAtt.lecture.course.courseName}"/>
+                            <input type="submit" value="Vérifier la présence" />
+                        </form>
+                    </b:column>
+ 
                 </b:dataTable>
 
 

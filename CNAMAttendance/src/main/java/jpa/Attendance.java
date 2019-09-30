@@ -1,6 +1,8 @@
 package jpa;
 
+import java.math.BigDecimal;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -33,24 +35,30 @@ import javax.persistence.*;
 
 public class Attendance
 {
+
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ATTENDANCE_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long attendance_id;
+
+
+
+    @Column(name = "PRESENT")
+    private Boolean present;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "LATITUDE")
+    private BigDecimal latitude;
+    @Column(name = "LONGITUDE")
+    private BigDecimal longitude;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Person person;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Lecture lecture;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long attendance_id;
 
-    @Column(nullable = true)
-    private boolean present;
-
-    @Column(nullable = true)
-    private double latitude;
-
-    @Column(nullable = true)
-    private double longitude;
 
     public Attendance()
     {
@@ -113,20 +121,55 @@ public class Attendance
             
     }
 
-    public double getLatitude() {
+
+    public Attendance(Long attendance_id) {
+        this.attendance_id = attendance_id;
+    }
+
+
+    public void setPresent(Boolean present) {
+        this.present = present;
+    }
+
+    public BigDecimal getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLatitude(double latitude) {
+    public void setLatitude(BigDecimal latitude) {
         this.latitude = latitude;
     }
 
-    public void setLongitude(double longitude) {
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (attendance_id != null ? attendance_id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Attendance)) {
+            return false;
+        }
+        Attendance other = (Attendance) object;
+        if ((this.attendance_id == null && other.attendance_id != null) || (this.attendance_id != null && !this.attendance_id.equals(other.attendance_id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "jpa.Attendance[ attendance_id=" + attendance_id + " ]";
     }
     
     

@@ -1,6 +1,8 @@
 ejb/ClassroomEjb.class
+service/AttendanceFacadeREST.class
 util/ISSAE_Util.class
 ctr/AdminPanelBean.class
+service/AbstractFacade.class
 jpa/Lecture.class
 ctr/LectureBean.class
 ctr/AttendanceBean.class
@@ -15,6 +17,7 @@ jpa/Classroom.class
 jpa/Attendance.class
 ctr/CirclesView.class
 ctr/ClassroomBean.class
+service/ApplicationConfig.class
 ctr/RoleBean.class
 ejb/LoginEjb.class
 ctr/PersonBean.class

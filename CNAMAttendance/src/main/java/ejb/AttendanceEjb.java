@@ -1,5 +1,6 @@
 package ejb;
 
+import java.math.BigDecimal;
 import jpa.Attendance;
 import jpa.Person;
 
@@ -38,7 +39,7 @@ public class AttendanceEjb
         em.merge(a);
     }
 
-    public void updateStudentLocation(Attendance a, double lat, double lng)
+    public void updateStudentLocation(Attendance a, BigDecimal lat, BigDecimal lng)
     {
         a.setLatitude(lat);
         a.setLongitude(lng);
