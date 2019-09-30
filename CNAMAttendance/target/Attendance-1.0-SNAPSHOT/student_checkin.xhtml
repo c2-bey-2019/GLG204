@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:b="http://bootsfaces.net/ui"
+>      
+    <h:head>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true&amp;key=AIzaSyC4VLUvLcI4PkGyc5FWbCc_vz-Bgu4la_g&amp;callback=initMap"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script type="text/javascript"> 
+ function getLocationConstant()
+{
+    if(navigator.geolocation)
+    {
+        navigator.geolocation.getCurrentPosition(onGeoSuccess,onGeoError);  
+    } else {
+        alert("Your browser or device doesn't support Geolocation");
+    }
+}
+
+// If we have a successful location update
+function onGeoSuccess(event)
+{
+        // alert("ok");
+   document.getElementById("Latitude").value =  event.coords.latitude; 
+    document.getElementById("Longitude").value = event.coords.longitude;
+
+ 
+}
+
+// If something has gone wrong with the geolocation request
+function onGeoError(event)
+{
+    alert("Error code " + event.code + ". " + event.message);
+}
+ </script>
+
+ <script type="text/javascript">
+    if (navigator.geolocation) {
+        checkGeolocationByHTML5();
+    } else {
+        checkGeolocationByLoaderAPI(); // HTML5 not supported! Fall back to Loader API.
+    }
+
+    function checkGeolocationByHTML5() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            setMapCenter(position.coords.latitude, position.coords.longitude);
+        }, function() {
+            checkGeolocationByLoaderAPI(); // Error! Fall back to Loader API.
+        });
+    }
+
+    function checkGeolocationByLoaderAPI() {
+        if (google.loader.ClientLocation) {
+            setMapCenter(google.loader.ClientLocation.latitude, google.loader.ClientLocation.longitude);
+        } else {
+            // Unsupported! Show error/warning?
+        }
+    }
+
+    function setMapCenter(latitude, longitude) {
+        w_gmap.getMap().setCenter(new google.maps.LatLng(latitude, longitude));
+    }
+
+</script>
+
+<script>
+ function CheckInAttendance() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 AND this.status == 200) {
+             alert(this.responseText);
+         }
+         
+    };
+    xhttp.open("PUT", "http://localhost:8080/CNAMAttendance/webresources/jpa.attendance/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value, true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send("{\"attendance_id\":1,\"latitude\":33.59430300000000000000,\"lecture\":{\"classroom\":{\"classroomName\":\"Classe 305\",\"classroom_id\":1,\"latitude\":0.0,\"longitude\":0.0},\"course\":{\"courseName\":\"ACCOV\",\"course_id\":53},\"date\":\"2019-09-01T00:00:00\",\"lecture_id\":1501,\"period\":{\"periodCode\":\"P2\",\"periodMondayToFriday\":\"4pm -> 5:30pm\",\"periodSaturday\":\"2:15pm ->3:45pm\",\"usedInMondayToFriday\":1,\"usedInSaturday\":1}},\"longitude\":35.49738900000000000000,\"person\":{\"email\":\"jihad.alarab@gmail.com\",\"firstName\":\"Jihad\",\"lastName\":\"Al-Arab\",\"passWord\":\"jihadjihad\",\"person_id\":1002,\"role\":{\"role_id\":10,\"type\":\"Student\"}},\"present\":false}");
+}
+</script>
+
+    </h:head>
+<h:body onload="getLocationConstant()" style="padding-top: 60px; background-color: #add;">
+    
+ Attendance Id : <h:outputText id="AttendanceId" value="#{attendanceBean.attendance_id}"/>
+ Latitude: <output type="text" id="Latitude" name="Latitude" value=""></output>
+ Longitude: <output type="text" id="Longitude" name="Longitude" value=""></output>
+<input type="button" value="Check in to class" onclick="UserAction()"/>
+
+<h:form>
+<b:commandButton value="Check In" 
+                 look="primary" 
+                 action="#{studentCheckInBean.handleClick}"
+                 update="@form"/>
+<b:commandButton value="Check In New"
+                         actionListener="#{studentCheckInBean.handleClick}"/>
+</h:form>
+
+    <b:panel>
+        <h:form prependId="false">
+            <b:row>
+               <b:column span="9">
+                    <h2>Localisation des étudiants sur Google Maps</h2>
+               </b:column>
+               <b:column span="1">
+                   <b:commandButton value="retourner à la page des enseignants" 
+                                    look="primary"
+                                    action="#{attendanceBean.returnToTeachersPage()}"/>
+               </b:column>
+            </b:row>
+        </h:form>
+    </b:panel>
+    
+ 
+  
+ <p:gmap id="w_gmap" widgetVar="w_gmap" type="HYBRID" center="41.381542, 2.122893" zoom="15" style="width:600px;height:400px">       
+ </p:gmap>
+</h:body>
+    
+</html>

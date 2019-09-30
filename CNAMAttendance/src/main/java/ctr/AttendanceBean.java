@@ -208,12 +208,12 @@ public class AttendanceBean implements Serializable
     // ...
     return "/teacher_map.xhtml?faces-redirect=true";
     }
-//    public List<Person> getStudentsByAttendance()
-//    {
-//
-//        studentsByAttendance = attEjb.getStudentsByAttendance(10L, lecture_id);
-//        return studentsByAttendance;
-//    }
+    
+    public String studentChekInByAttendance(Long att_id) {
+    
+    this.attendance_id = att_id;
+    return "/student_checkin.xhtml?faces-redirect=true";
+    }
 
     public List<Attendance> getAttendanceListByLecture() {
 

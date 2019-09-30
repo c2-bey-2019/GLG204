@@ -87,7 +87,7 @@ public class StudentsViewOnMap implements Serializable
   
 
         for (Attendance stuAtt : studentsByAttendance) {
-            LatLng coordStu = new LatLng(stuAtt.getLatitude(), stuAtt.getLongitude());
+            LatLng coordStu = new LatLng(stuAtt.getLatitude().doubleValue() , stuAtt.getLongitude().doubleValue());
             Circle circleStu = new Circle(coordStu, 30);
             circleStu.setStrokeColor("#00ff00");
             circleStu.setFillColor("#00ff00");
