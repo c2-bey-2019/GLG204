@@ -11,7 +11,7 @@ The admin must be able to see the check-ins on a map in the application.
 ## Technologies Used
 * JAVA EE
 * Java Server Faces
-* Java Persistance API
+* Java Persistence API
 * MySQL
 * Javascript
 * RESTFul Web Services
