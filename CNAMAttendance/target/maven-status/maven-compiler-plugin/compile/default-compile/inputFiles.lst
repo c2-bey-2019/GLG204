@@ -4,7 +4,6 @@
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/ClassroomBean.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Course.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/StudentsViewOnMap.java
-/home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/StudentCheckInBean.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Attendance.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/ClassroomEjb.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/service/AttendanceFacadeREST.java
