@@ -34,6 +34,9 @@ public class AttendanceBean implements Serializable
     private List<Person> studentsByLecture;
     private List<Attendance> studentsByAttendance;
     private List<Attendance> attendanceList;
+    private List<Attendance> studentAttendanceByCourse;
+    private StudentsViewOnMap stuViewOnMap;
+
 
 
     @Inject
@@ -45,8 +48,15 @@ public class AttendanceBean implements Serializable
     @Inject
     private LectureEjb lecEjb;
 
+
+    
     public String submit()
     {
+        if (lecture_id == null)
+        {
+            return "";
+        };
+        
         //Injecting lecEjb to be able to get course_id through lecture_id
         setCourse_id(lecEjb.getCourse_id(lecture_id));
         attendanceList = new ArrayList<>();
@@ -75,13 +85,6 @@ public class AttendanceBean implements Serializable
         }
         return "admin_panel?faces-redirect=true";
     }
-
-
-    public void merge(Long att_id)
-{
-
-    attEjb.markAttendance(att_id);
-}
 
     public Long getAttendance_id()
     {
@@ -160,14 +163,21 @@ public class AttendanceBean implements Serializable
         return students;
     }
 
-    public boolean isPresent()
+    public boolean getPresent()
     {
         return present;
     }
 
-    public void setPresent(boolean present)
+    public void setPresent(Long att_id, boolean present)
     {
-        this.present = present;
+        attEjb.markAttendance(att_id,present);
+       
+    }
+    
+    public void setPresent2(Attendance a, boolean present)
+    {
+        attEjb.markAttendance2(a,present);
+       
     }
 
     public List<Person> getStudentsByCourse()
@@ -188,13 +198,22 @@ public class AttendanceBean implements Serializable
     {
         return "attendance?faces-redirect=true";
     }
+    
+    public String returnToTeachersPage()
+    {
+        return "teacher_panel?faces-redirect=true";
+    }
 
-//    public List<Person> getStudentsByAttendance()
-//    {
-//
-//        studentsByAttendance = attEjb.getStudentsByAttendance(10L, lecture_id);
-//        return studentsByAttendance;
-//    }
+    public String showMap() {
+    // ...
+    return "/teacher_map.xhtml?faces-redirect=true";
+    }
+    
+    public String studentChekInByAttendance(Long att_id) {
+    
+    this.attendance_id = att_id;
+    return "/student_checkin.xhtml?faces-redirect=true";
+    }
 
     public List<Attendance> getAttendanceListByLecture() {
 
@@ -204,4 +223,25 @@ public class AttendanceBean implements Serializable
     public void setAttendanceList(List<Attendance> attendanceList) {
         this.attendanceList = attendanceList;
     }
+
+    public List<Attendance> getStudentAttendanceByCourse() {
+        return studentAttendanceByCourse;
+    }
+
+    public void setStudentAttendanceByCourse(long pers_id) {
+        this.studentAttendanceByCourse = attEjb.getStudentAttendanceByCourse(10L, course_id, pers_id);
+    }
+
+    public StudentsViewOnMap getStuViewOnMap() {
+        this.submit();
+        this.stuViewOnMap = new StudentsViewOnMap();
+        this.stuViewOnMap.Refresh(this.getStudentsByAttendance());
+        return this.stuViewOnMap;
+    }
+
+    public void setStuViewOnMap(StudentsViewOnMap stuViewOnMap) {
+        this.stuViewOnMap = stuViewOnMap;
+    }
+    
+    
 }

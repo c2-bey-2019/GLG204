@@ -35,6 +35,7 @@ public class CourseEjb
         return courses;
     }
     
+    
     public List<Lecture> getLecturesByCourse(Long course_id)
     {
         List<Lecture> lecturesByCourse;

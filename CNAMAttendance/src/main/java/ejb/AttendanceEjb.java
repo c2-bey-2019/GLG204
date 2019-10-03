@@ -1,5 +1,6 @@
 package ejb;
 
+import java.math.BigDecimal;
 import jpa.Attendance;
 import jpa.Person;
 
@@ -21,10 +22,27 @@ public class AttendanceEjb
         em.persist(a);
     }
 
-    public void markAttendance(Long attendance_id)
+    public void markAttendance(Long attendance_id, boolean pres)
     {
         Attendance a = em.find(Attendance.class, attendance_id);
-        a.setPresent(!a.isPresent());
+        
+        //em.getTransaction().begin(); 
+        a.setPresent(pres);
+        //em.getTransaction().commit();
+        em.merge(a);
+    }
+    public void markAttendance2(Attendance a, boolean pres)
+    {
+        //em.getTransaction().begin(); 
+        a.setPresent(pres);
+        //em.getTransaction().commit();
+        em.merge(a);
+    }
+
+    public void updateStudentLocation(Attendance a, BigDecimal lat, BigDecimal lng)
+    {
+        a.setLatitude(lat);
+        a.setLongitude(lng);
         em.merge(a);
     }
 
@@ -63,6 +81,20 @@ public class AttendanceEjb
         return attListBylecture;
     }
 
+    public List<Attendance> getStudentAttendanceByCourse(Long role_id, Long course_id, Long person_id)
+    {
+        List<Attendance> attListBylecture;
+        attListBylecture = em.createNamedQuery(
+                "selectStudentAttendanceByCourse", Attendance.class)
+                .setParameter(1, role_id)
+                .setParameter(2, course_id)
+                .setParameter(3, person_id)
+                .getResultList();
+        return attListBylecture;
+    }
+
+    
+    
     public List<Person> getStudentsByLecture(Long role_id, Long course_id, Long lecture_id)
     {
         List<Person> persons;

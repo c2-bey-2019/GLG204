@@ -30,7 +30,7 @@
 
     <b:accordion expanded-panels="panel1,panel3">
 
-        <b:panel id="student" title="Étudiant" look="primary">
+        <b:panel id="student" title="Etudiant" look="primary">
 
 
             <h:form>
@@ -349,7 +349,7 @@
                                 <b:column medium-screen="2">
                                     <b:commandButton value="Ajouter" ajax="true"
                                                      actionListener="#{courseBean.submit}"
-                                                     update="add-remove-course course-picker :course-form:**:table" look="primary"/>
+                                                     update="add-remove-course course-picker :course-form:**:coursestable" look="primary"/>
                                 </b:column>
 
                             </b:row>
@@ -368,7 +368,7 @@
                                 <b:column medium-screen="2">
                                     <b:commandButton value="Supprimer" ajax="true"
                                                      actionListener="#{courseBean.remove}"
-                                                     update="add-remove-course course-picker :course-form:**:table" look="danger"
+                                                     update="add-remove-course course-picker :course-form:**:coursestable" look="danger"
                                     />
                                 </b:column>
                             </b:row>
@@ -380,7 +380,7 @@
 
                             <b:row>
                                 <b:column span="1"><h:outputText value="Cours:"/></b:column>
-                                <b:column span="2">
+                                <b:column span="3">
                                     <b:selectOneMenu id="course-picker" value="#{lectureBean.course_id}">
                                         <f:selectItems value="#{courseBean.courses}" var="courses"
                                                        itemValue="#{courses.course_id}"
@@ -395,16 +395,36 @@
                                                   show-week="true"
                                                   changeYear="true" changeMonth="true" required="true"/>
                                 </b:column>
+
+                                <b:column span="1"><h:outputText value="Periode:"/></b:column>
                                 <b:column span="2">
-                                    <b:commandButton value="Sauvegarder"
+                                    <b:selectOneMenu id="period-picker" value="#{lectureBean.periodCode}">
+                                        <f:selectItems value="#{periodBean.periods}" var="periods"
+                                                       itemValue="#{periods.periodCode}"
+                                                       itemLabel="#{periods.periodCode}"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column span="1"><h:outputText value="Classe:"/></b:column>
+                                <b:column span="3">
+                                    <b:selectOneMenu id="classroom-picker" value="#{lectureBean.classroom_id}">
+                                        <f:selectItems value="#{classroomBean.classrooms}" var="classrooms"
+                                                       itemValue="#{classrooms.classroom_id}"
+                                                       itemLabel="#{classrooms.classroomName}"/>
+                                    </b:selectOneMenu>
+                                </b:column>
+                                
+                                <b:column span="2">
+                                    <b:commandButton value="Ajouter"
                                                      actionListener="#{lectureBean.submit}" look="primary"
-                                                     update="add-new-lecture"/>
+                                                     update="add-new-lecture :course-form:**:coursestable"/>
                                 </b:column>
 
                                 <b:column span="1">
                                     <b:commandButton value="Supprimer"
                                                      actionListener="#{lectureBean.remove}" look="danger"
-                                                     update="add-new-lecture"/>
+                                                     update="add-new-lecture :course-form:**:coursestable"/>
                                 </b:column>
 
                             </b:row>
@@ -414,7 +434,7 @@
                     </h:form>
                 </b:row>
 
-                <b:dataTable id="table" styleClass="table table-striped" value="#{courseBean.courses}"
+                <b:dataTable id="coursestable" styleClass="table table-striped" value="#{courseBean.courses}"
                              var="courses"
                              rows="15">
                     <b:column>
@@ -433,7 +453,7 @@
                     <b:column>
                         <f:facet name="header"><h:outputText value="Conférences"/></f:facet>
                         <a:repeat value="#{courseBean.getLecturesByCourse(courses.course_id)}" var="item">
-                            #{item.date}<br/>
+                            [#{item.getDateFormated()}] [#{item.period.getPeriodDesc(item.date)}] [#{item.classroom.classroomName}]<br/>
                         </a:repeat> 
 
                     </b:column>
@@ -451,7 +471,7 @@
                     <b:panel span="6" look="info" title="Choisissez un Cours" collapsable="false">
                         <b:row>
                             <b:column medium-screen="2"><h:outputText value="Cours:"/></b:column>
-                            <b:column medium-screen="4">
+                            <b:column medium-screen="5">
                                 <b:selectOneMenu id="course-picker" value="#{lectureBean.course_id}">
                                     <f:selectItems value="#{courseBean.courses}" var="courses"
                                                    itemValue="#{courses.course_id}"
@@ -466,17 +486,17 @@
                         </b:row>
                     </b:panel>
 
-                    <b:panel span="6" look="info" title="Choisir la Date de la Conférence" collapsable="false">
+                    <b:panel span="6" look="info" title="Choisir la Conférence" collapsable="false">
 
                         <b:row>
                             <b:column>
                                 <b:row>
-                                    <b:column span="4"><h:outputText value="Date de la Conférence:"/></b:column>
-                                    <b:column span="4">
+                                    <b:column span="2"><h:outputText value="Conférence:"/></b:column>
+                                    <b:column span="7">
                                         <b:selectOneMenu id="lecture-picker" value="#{attendanceBean.lecture_id}">
                                             <f:selectItems value="#{lectureBean.lecturesByCourse}" var="leb"
                                                            itemValue="#{leb.lecture_id}"
-                                                           itemLabel="#{leb.date}"/>
+                                                           itemLabel="[#{leb.getDateFormated()}] [#{leb.period.getPeriodDesc(leb.date)}] [#{leb.classroom.classroomName}]"/>
                                         </b:selectOneMenu>
                                     </b:column>
 
@@ -515,9 +535,9 @@
                     <h:column>
                         <f:facet name="header"><h:outputText value="Présent?"/></f:facet>
                         
-                        <b:commandButton value="#{studentAtt.present}"
+                        <b:commandButton value="#{studentAtt.getPresentFormated()}"
                                          look="primary"
-                                         action="#{studentAtt.setPresent(!studentAtt.present)}"
+                                         action="#{attendanceBean.setPresent2(studentAtt, !studentAtt.present)}"
                                          update="@form"/>
                     </h:column>
 

@@ -17,6 +17,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import jpa.Course;
 
 @Stateless
 public class PersonEjb
@@ -87,4 +88,20 @@ public class PersonEjb
                 .getResultList();
         return persons;
     }
+
+    public List<Course> getCoursesByPerson(Long person_id)
+    {
+        List<Course> courses;
+        courses = em.createNamedQuery(
+                "selectCoursesByPersonId", Course.class)
+                .setParameter(1, person_id)
+                .getResultList();
+  
+//        courses = em.createNamedQuery(
+//                "selectAllCourses")
+//                .getResultList();
+
+        return courses;
+    }
+
 }

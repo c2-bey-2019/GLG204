@@ -10,16 +10,24 @@ The admin must be able to see the check-ins on a map in the application.
 
 ## Technologies Used
 * JAVA EE
-* JSF
+* Java Server Faces
+* Java Persistence API
 * MySQL
+* Javascript
+* RESTFul Web Services
 * Netbeans IDE 8.2
+* GlassFish Server 4
 
 ## Extra Feature: CNAM People 
 ### (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
 
 Watch the Video!
 
+<<<<<<< HEAD
 [![Watch the video](https://drive.google.com/open?id=1_Nab_8_bw-2atoF7b6t2dHyeIOznZwQf)](https://youtu.be/l4e7GhhKLfQ)
+=======
+[![Watch the video](https://raw.githubusercontent.com/c2-bey-2019/GLG204/master/video.jpg)](https://youtu.be/l4e7GhhKLfQ)
+>>>>>>> 006e701d29cd49d5feadb32e7503f7b87e450dda
 
 CNAM People is a Web Application that allows CNAM Administration to consolidate their employee information in one directory where they can easily add, edit, search and remove employees to always reflect the real number of people in the organization along with their current information.
 
@@ -49,6 +57,24 @@ Future development tasks:
 * Mazen Kabalan
 * Mohamed Sabra
 * Raymond Khawand
+
+## License
+
+    GNU General Public License, Version 3
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 
 
 ## Developers corner
