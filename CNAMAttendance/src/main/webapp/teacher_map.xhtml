@@ -8,18 +8,17 @@
       xmlns:b="http://bootsfaces.net/ui"
 >      
     <h:head>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;key=AIzaSyC4VLUvLcI4PkGyc5FWbCc_vz-Bgu4la_g&amp;callback=initMap"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;key=#{attParametersBean.getAttParametersList()[0].googleMapsApi}"></script>
     </h:head>
 <h:body>
- 
     <b:panel>
         <h:form prependId="false">
             <b:row>
                <b:column span="9">
-                    <h2>Localisation des étudiants sur Google Maps</h2>
+                    <h3>Localisation des auditeurs qui ont verifiés leurs enregistrements sur Google Map</h3>
                </b:column>
                <b:column span="1">
-                   <b:commandButton value="retourner à la page des enseignants" 
+                   <b:commandButton value="Retourner à la page principale" 
                                     look="primary"
                                     action="#{attendanceBean.returnToTeachersPage()}"/>
                </b:column>
@@ -28,14 +27,59 @@
     </b:panel>
     
     <h:form prependId="false">
-        
-        <p:growl id="issaeMap" life="3000" />
- 
-    <p:gmap id="gmap" center="33.892954, 35.497281" zoom="15" type="HYBRID" style="width:100%;height:500px" model="#{attendanceBean.getStuViewOnMap().getEmptyMap()}">
-        <p:ajax event="overlaySelect" listener="#{attendanceBean.stuViewOnMap.onCircleSelect}" update="issaeMap" />
+                  <b:dataTable id="attendance-table" styleClass="table table-striped"
+                             value="#{attendanceBean.studentsCheckedInByAttendance}"
+                             var="studentCheckIn"
+                             rows="15">
+                    <b:column>
+                        <f:facet name="header"><h:outputText value="Prénom"/></f:facet>
+                        <h:outputText value="#{studentCheckIn.person.firstName}"/>
+                    </b:column>
+                    <b:column>
+                        <f:facet name="header"><h:outputText value="Nom de Famille"/></f:facet>
+                        <h:outputText value="#{studentCheckIn.person.lastName}"/>
+                    </b:column>
+                    <b:column>
+                        <f:facet name="header"><h:outputText value="Dernier Enregistrement"/></f:facet>
+                        <h:outputText value="#{studentCheckIn.lastCheckInDate}"/>
+                    </b:column>
+                    <b:column>
+                        <f:facet name="header"><h:outputText value="Distance to ISSAE"/></f:facet>
+                        <h:outputText value="#{attendanceBean.getStudentDistanceFromISSAE(studentCheckIn.latitude.doubleValue(), studentCheckIn.longitude.doubleValue(), attParametersBean.getAttParametersList()[0].issaeLatitude.doubleValue(), attParametersBean.getAttParametersList()[0].issaeLongitude.doubleValue(), 'K')}K"/>
+                    </b:column>
+                    <h:column>
+                        <f:facet name="header"><h:outputText value=""/></f:facet>
+                        
+                        <b:commandButton value="Faire Voir sur la carte"
+                                         look="primary"
+                                         action="#{attendanceBean.setDisplayLocation(studentCheckIn.latitude, studentCheckIn.longitude)}"
+                                         update="@form"/>
+                    </h:column>
+                </b:dataTable>
+
+    
+
+    <p:growl id="issaeMap" life="3000" />
+
+
+    <p:gmap id="gmap" center="#{attendanceBean.latitude}, #{attendanceBean.longitude}" zoom="13" type="HYBRID" model="#{attendanceBean.studentsMarkersOnMap.advancedModel}" style="width:100%;height:400px">
+
+        <p:ajax event="overlaySelect" listener="#{attendanceBean.studentsMarkersOnMap.onMarkerSelect}" update="issaeMap" />
+
+        <p:gmapInfoWindow id="infoWindow">
+            <p:outputPanel style="text-align: center; display: block; margin: auto">
+
+                <h:outputText value="etudiant issae:#{attendanceBean.studentsMarkersOnMap.marker.id}" />
+
+            </p:outputPanel>
+        </p:gmapInfoWindow>
     </p:gmap>
-    </h:form>
- 
+
+
+
+
+</h:form>
+
  
 </h:body>
     

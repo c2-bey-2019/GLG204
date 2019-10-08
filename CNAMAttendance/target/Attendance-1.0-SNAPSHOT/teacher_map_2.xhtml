@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:b="http://bootsfaces.net/ui"
+>      
+    <h:head>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;key=AIzaSyCv5_oKLfdKAIxGd8-iaMc_4EXOBFTIHrQ&amp;callback=initMap"></script>
+    </h:head>
+<h:body>
+ 
+    <b:panel>
+        <h:form prependId="false">
+            <b:row>
+               <b:column span="9">
+                    <h2>Localisation des auditeurs sur Google Maps</h2>
+               </b:column>
+               <b:column span="1">
+                   <b:commandButton value="retourner à la page des enseignants" 
+                                    look="primary"
+                                    action="#{attendanceBean.returnToTeachersPage()}"/>
+               </b:column>
+            </b:row>
+        </h:form>
+    </b:panel>
+    
+    <h:form prependId="false">
+        
+        <p:growl id="issaeMap" life="3000" />
+ 
+    <p:gmap id="gmap" center="33.892954, 35.497281" zoom="15" type="HYBRID" style="width:100%;height:500px" model="#{attendanceBean.getStuViewOnMap().getEmptyMap()}">
+        <p:ajax event="overlaySelect" listener="#{attendanceBean.stuViewOnMap.onCircleSelect}" update="issaeMap" />
+    </p:gmap>
+    </h:form>
+ 
+ 
+</h:body>
+    
+</html>

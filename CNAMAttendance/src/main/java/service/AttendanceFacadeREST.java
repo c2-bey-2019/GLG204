@@ -6,6 +6,8 @@
 package service;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -58,7 +60,10 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
         entity = super.find(id);
         entity.setLatitude(new BigDecimal(lat));
         entity.setLongitude(new BigDecimal(lng));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        entity.setLastCheckInDate(timestamp);
         super.edit(entity);
+        
     }
 //    @PUT
 //    @Path("{id}/{latitude}/{longitude}")

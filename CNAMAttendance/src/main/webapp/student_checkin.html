@@ -34,6 +34,7 @@
         var lecturePeriod = getParameterByName('lecturePeriod');
         var lectureClass = getParameterByName('lectureClass');
         var course = getParameterByName('course');
+        var googleAPIKey = getParameterByName('googleAPIKey');
 
         
         document.getElementById("AttendanceId").value = attId;
@@ -41,6 +42,9 @@
         document.getElementById("LecturePeriod").value = lecturePeriod;
         document.getElementById("LectureClass").value = lectureClass;
         document.getElementById("Course").value = course;
+        document.getElementById("GoogleAPIKey").value = googleAPIKey;
+     
+        
     }
 
     </script>
@@ -87,11 +91,10 @@
         infoWindow.open(map);
       }
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4VLUvLcI4PkGyc5FWbCc_vz-Bgu4la_g&callback=initMap">
-    </script>
     
-     <script type="text/javascript" language="javascript">
+    
+
+<script type="text/javascript" language="javascript">
     
  function getLocationConstant()
 {
@@ -138,9 +141,12 @@ function CheckInByAttendance2() {
     xhttp.open("PUT", "http://localhost:8080/CNAMAttendance/webresources/jpa.attendance/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value, true);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send("{\"attendance_id\":1,\"latitude\":33.59430300000000000000,\"lecture\":{\"classroom\":{\"classroomName\":\"Classe 305\",\"classroom_id\":1,\"latitude\":0.0,\"longitude\":0.0},\"course\":{\"courseName\":\"ACCOV\",\"course_id\":53},\"date\":\"2019-09-01T00:00:00\",\"lecture_id\":1501,\"period\":{\"periodCode\":\"P2\",\"periodMondayToFriday\":\"4pm -> 5:30pm\",\"periodSaturday\":\"2:15pm ->3:45pm\",\"usedInMondayToFriday\":1,\"usedInSaturday\":1}},\"longitude\":35.49738900000000000000,\"person\":{\"email\":\"jihad.alarab@gmail.com\",\"firstName\":\"Jihad\",\"lastName\":\"Al-Arab\",\"passWord\":\"jihadjihad\",\"person_id\":1002,\"role\":{\"role_id\":10,\"type\":\"Student\"}},\"present\":false}");
+    alert("Check In Succeeded");
 }
- </script>
-
+function goBack() {
+  window.history.back();
+}
+</script>
   </head>
   
   <body onload="getLocationConstant();showAttId();">
@@ -169,18 +175,25 @@ function CheckInByAttendance2() {
 
  <input type="hidden" id="Latitude" name="Latitude" value="" disabled>
  <input type="hidden" id="Longitude" name="Longitude" value="" disabled>
+ <input type="hidden" id="GoogleAPIKey" name="GoogleAPIKey" value="" disabled>
  <br>
  
  
  <table>
   <tr>
-    <td width="25%"></td>
+    <td width="5%"></td>
     <td><input type="button" value="Vérifier la présence" onclick="CheckInByAttendance2()"/></td>
-    <td width="25%"></td>
+    <td><input type="button" value="Retourner à la page principale" onclick="goBack()"/></td>
+    <td width="5%"></td>
   </tr>
  </table> 
 
-  
+
+
+<script>
+    document.write("<script async defer src='https://maps.googleapis.com/maps/api/js?key=" + document.getElementById('GoogleAPIKey').value + "&callback=initMap" + "'><\/scr" + "ipt>");
+</script>
+
   
   <div id="map"></div>
 

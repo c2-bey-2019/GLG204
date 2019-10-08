@@ -14,9 +14,12 @@ import javax.faces.event.ValueChangeListener;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import util.ISSAE_Util;
 
 
 @Named
@@ -33,12 +36,16 @@ public class AttendanceBean implements Serializable
     private List<Person> studentsByCourse;
     private List<Person> studentsByLecture;
     private List<Attendance> studentsByAttendance;
+    private List<Attendance> studentsCheckedInByAttendance;
     private List<Attendance> attendanceList;
     private List<Attendance> studentAttendanceByCourse;
     private StudentsViewOnMap stuViewOnMap;
+    private StudentsMarkersOnMap studentsMarkersOnMap;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 
-
-
+ 
+  
     @Inject
     private AttendanceEjb attEjb;
 
@@ -86,6 +93,39 @@ public class AttendanceBean implements Serializable
         return "admin_panel?faces-redirect=true";
     }
 
+    public String refreshStudentsCheckedInByAttendance()
+    {
+        
+        //Injecting lecEjb to be able to get course_id through lecture_id
+        studentsCheckedInByAttendance = new ArrayList<Attendance>();
+
+        try
+            {
+
+            for(Attendance att: studentsByAttendance) {
+             try
+              {
+                if (!(att.getLastCheckInDate()== null))
+                {
+                   studentsCheckedInByAttendance.add(att); 
+                }
+                    
+              }
+               catch (EJBException ejbe)
+                {
+                  continue;
+                }
+            }
+            }
+        catch (EJBException ejbe)
+        {
+            return "teacher_map?faces-redirect=true";
+
+        }
+        return "teacher_map?faces-redirect=true";
+    }
+
+
     public Long getAttendance_id()
     {
         return attendance_id;
@@ -100,25 +140,6 @@ public class AttendanceBean implements Serializable
     {
         return attendanceList;
     }
-
-    //    public String setAttendance()
-//    {
-//        studentsByAttendance = attEjb.getStudentsByAttendance(10L, lecture_id);
-//        try
-//        {
-//            for (Person student : studentsByAttendance)
-//                attEjb.markAttendance(new Attendance(student, new Lecture(lecture_id), present));
-//        } catch (EJBException ejbe)
-//        {
-//            return "admin_panel?faces-redirect=true";
-//        }
-//        return "admin_panel?faces-redirect=true";
-//    }
-
-//    public List<Person> getStudentsByLecture()
-//    {
-//        return studentsByLecture;
-//    }
 
     public void setStudentsByAttendance(List<Attendance> studentsByAttendance)
     {
@@ -204,8 +225,10 @@ public class AttendanceBean implements Serializable
         return "teacher_panel?faces-redirect=true";
     }
 
-    public String showMap() {
-    // ...
+    public String showMap() 
+    {
+    this.refreshStudentsCheckedInByAttendance();    
+    this.setDisplayLocation(new BigDecimal(33.892954), new BigDecimal(35.497281));
     return "/teacher_map.xhtml?faces-redirect=true";
     }
     
@@ -242,6 +265,111 @@ public class AttendanceBean implements Serializable
     public void setStuViewOnMap(StudentsViewOnMap stuViewOnMap) {
         this.stuViewOnMap = stuViewOnMap;
     }
+
+    public StudentsMarkersOnMap getStudentsMarkersOnMap() {
+        this.submit();
+        this.studentsMarkersOnMap = new StudentsMarkersOnMap();
+        this.studentsMarkersOnMap.Refresh(this.getStudentsByAttendance());
+        return this.studentsMarkersOnMap;
+    }
+
+    public void setStudentsMarkersOnMap(StudentsMarkersOnMap studentsMarkersOnMap) {
+        this.studentsMarkersOnMap = studentsMarkersOnMap;
+    }
+
+    public Long getPerson_id() {
+        return person_id;
+    }
+
+    public boolean isPresent() {
+        return present;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public AttendanceEjb getAttEjb() {
+        return attEjb;
+    }
+
+    public RoleEjb getRoleEjb() {
+        return roleEjb;
+    }
+
+    public LectureEjb getLecEjb() {
+        return lecEjb;
+    }
+
+    public void setPerson_id(Long person_id) {
+        this.person_id = person_id;
+    }
+
+    public void setPresent(boolean present) {
+        this.present = present;
+    }
+
+    public void setStudents(List<Person> students) {
+        this.students = students;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setStudentsByCourse(List<Person> studentsByCourse) {
+        this.studentsByCourse = studentsByCourse;
+    }
+
+    public void setStudentAttendanceByCourse(List<Attendance> studentAttendanceByCourse) {
+        this.studentAttendanceByCourse = studentAttendanceByCourse;
+    }
+
+    public void setAttEjb(AttendanceEjb attEjb) {
+        this.attEjb = attEjb;
+    }
+
+    public void setRoleEjb(RoleEjb roleEjb) {
+        this.roleEjb = roleEjb;
+    }
+
+    public void setLecEjb(LectureEjb lecEjb) {
+        this.lecEjb = lecEjb;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
     
-    
+    public void setDisplayLocation(BigDecimal latitude, BigDecimal longitude) {
+       this.latitude = latitude;
+       this.longitude = longitude;
+    }
+
+    public List<Attendance> getStudentsCheckedInByAttendance() {
+        return studentsCheckedInByAttendance;
+    }
+
+    public void setStudentsCheckedInByAttendance(List<Attendance> studentsCheckedInByAttendance) {
+        this.studentsCheckedInByAttendance = studentsCheckedInByAttendance;
+    }
+
+    public String getStudentDistanceFromISSAE(double lat1, double lon1, double lat2, double lon2, char mes) {
+        DecimalFormat df = new DecimalFormat("#######0.000");        
+        return df.format(ISSAE_Util.distance(lat1, lon1 ,lat2,lon2,mes));
+    }
+
+
 }
