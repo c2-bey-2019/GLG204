@@ -22,12 +22,7 @@ The admin must be able to see the check-ins on a map in the application.
 ### (To be linked to CNAM Attendance in the future, we welcome your contributions and suggestions)
 
 Watch the Video!
-
-<<<<<<< HEAD
 [![Watch the video](https://drive.google.com/open?id=1_Nab_8_bw-2atoF7b6t2dHyeIOznZwQf)](https://youtu.be/l4e7GhhKLfQ)
-=======
-[![Watch the video](https://raw.githubusercontent.com/c2-bey-2019/GLG204/master/video.jpg)](https://youtu.be/l4e7GhhKLfQ)
->>>>>>> 006e701d29cd49d5feadb32e7503f7b87e450dda
 
 CNAM People is a Web Application that allows CNAM Administration to consolidate their employee information in one directory where they can easily add, edit, search and remove employees to always reflect the real number of people in the organization along with their current information.
 
