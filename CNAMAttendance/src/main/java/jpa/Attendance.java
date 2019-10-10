@@ -1,6 +1,8 @@
 package jpa;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -52,6 +54,10 @@ public class Attendance
     private BigDecimal latitude;
     @Column(name = "LONGITUDE")
     private BigDecimal longitude;
+    
+    @Column(name = "LAST_CHECK_IN_DATE")
+    private Timestamp lastCheckInDate;
+    
     @ManyToOne(cascade = CascadeType.MERGE)
     private Person person;
 
@@ -147,6 +153,15 @@ public class Attendance
         this.longitude = longitude;
     }
 
+    public Timestamp getLastCheckInDate() {
+        return lastCheckInDate;
+    }
+
+    public void setLastCheckInDate(Timestamp lastCheckInDate) {
+        this.lastCheckInDate = lastCheckInDate;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -30,12 +30,12 @@
 
     <b:accordion expanded-panels="panel1,panel3">
 
-        <b:panel id="student" title="Etudiant" look="primary">
+        <b:panel id="student" title="Auditeur" look="primary">
 
 
             <h:form>
                 <b:row>
-                    <b:panel span="7" id="add_new_student" title="Ajouter / Supprimer un Etudiant" look="info" collapsed="true">
+                    <b:panel span="7" id="add_new_student" title="Ajouter / Supprimer un Auditeur" look="info" collapsed="true">
                         <b:row>
                             <b:column mediumScreen="6">
                                 <b:row>
@@ -87,7 +87,7 @@
                             <b:column mediumScreen="6">
 
                                 <b:row>
-                                    <b:column mediumScreen="2"><h:outputText value="Etudiant:"/></b:column>
+                                    <b:column mediumScreen="2"><h:outputText value="Auditeur:"/></b:column>
                                     <b:column mediumScreen="6">
                                         <b:selectOneMenu value="#{personBean.person_id}">
                                             <f:selectItems value="#{personBean.getPersonsByRole(10)}" var="p"
@@ -123,7 +123,7 @@
 
 
                         <b:row>
-                            <b:column span="2"><h:outputText value="Etudiant:"/></b:column>
+                            <b:column span="2"><h:outputText value="Auditeur:"/></b:column>
                             <b:column span="4">
                                 <b:selectOneMenu value="#{registrationBean.person_id}">
                                     <f:selectItems value="#{personBean.getPersonsByRole(10)}" var="p"
@@ -443,7 +443,7 @@
                     </b:column>
                     
                     <b:column>
-                        <f:facet name="header"><h:outputText value="Renseignant"/></f:facet>
+                        <f:facet name="header"><h:outputText value="Prof"/></f:facet>
                         <a:repeat value="#{registrationBean.getPersonsByCourse(courses.course_id,20)}" var="item">
                             #{item.firstName} #{item.lastName}<br/>
                         </a:repeat> 

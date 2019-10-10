@@ -16,14 +16,14 @@
 
 
 <h:head>
-    <title>Renseignant</title>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;key=AIzaSyC4VLUvLcI4PkGyc5FWbCc_vz-Bgu4la_g&amp;callback=initMap"></script>
+    <title>Prof</title>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;key=#{attParametersBean.getAttParametersList()[0].googleMapsApi}&amp;callback=initMap"></script>
 </h:head>
 
 <h:body style="padding-top: 60px; background-color: #add;">
     <div class="container" align="center">
         <h2>Présence à l'ISSAE</h2>
-        <h3>Tableau de Bord Renseignant</h3>
+        <h3>Tableau de Bord Prof</h3>
         <br/>
     </div>
 
@@ -42,7 +42,7 @@
                     </b:column>
                     
                     <b:column>
-                        <f:facet name="header"><h:outputText value="Renseignant"/></f:facet>
+                        <f:facet name="header"><h:outputText value="Prof"/></f:facet>
                         <a:repeat value="#{registrationBean.getPersonsByCourse(courses.course_id,20)}" var="item">
                             #{item.firstName} #{item.lastName}<br/>
                         </a:repeat> 
@@ -112,7 +112,7 @@
                                     <b:column span="3"/>
                                    
                                     <b:column span="5">
-                                        <b:commandButton value="  Afficher la localisation des étudiants sur Google Maps  " 
+                                        <b:commandButton value="  Afficher la localisation des auditeurs sur Google Maps  " 
                                                          look="primary"
                                                          action="#{attendanceBean.showMap()}"/>
                                     </b:column>
@@ -147,13 +147,12 @@
                                          look="primary"
                                          action="#{attendanceBean.setPresent2(studentAtt, !studentAtt.present)}"
                                          update="@form"/>
-     </h:column>
+                    </h:column>
 
 
                 </b:dataTable>
                 
             </h:form>
-
         </b:panel>
 
     </b:accordion>
