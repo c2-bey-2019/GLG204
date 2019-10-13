@@ -26,6 +26,8 @@ public class CourseBean implements Serializable
     @NotNull
     private String courseBeanName;
 
+    private Long courseIdMod;
+    private String courseBeanNameMod;
 
     @Inject
     private CourseEjb courseEjb;
@@ -49,6 +51,20 @@ public class CourseBean implements Serializable
         courseEjb.removeCourse(this.course_id);
     }
 
+
+    public void initModify() {
+        Course c = courseEjb.getCourseById(this.courseIdMod);
+        this.setCourseIdMod(c.getCourse_id());
+        this.setCourseBeanNameMod(c.getCourseName());
+                   
+    }
+    
+    public void modify()
+    {
+        courseEjb.modifyCourse(this.courseIdMod, this.courseBeanNameMod);
+        setCourseBeanNameMod("");      
+              
+    }
 
     public String getCourseBeanName()
     {
@@ -81,6 +97,22 @@ public class CourseBean implements Serializable
         List<Lecture> lectures;
         lectures = courseEjb.getLecturesByCourse(course_id);
         return lectures;
+    }
+
+    public Long getCourseIdMod() {
+        return courseIdMod;
+    }
+
+    public void setCourseIdMod(Long courseIdMod) {
+        this.courseIdMod = courseIdMod;
+    }
+
+    public String getCourseBeanNameMod() {
+        return courseBeanNameMod;
+    }
+
+    public void setCourseBeanNameMod(String courseBeanNameMod) {
+        this.courseBeanNameMod = courseBeanNameMod;
     }
     
     

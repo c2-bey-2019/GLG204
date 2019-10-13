@@ -28,86 +28,162 @@
     </div>
 
 
-    <b:accordion expanded-panels="panel1,panel3">
+    <b:accordion expanded-panels="student">
 
         <b:panel id="student" title="Auditeur" look="primary">
 
 
-            <h:form>
+            <h:form id="formAddStu">
                 <b:row>
-                    <b:panel span="7" id="add_new_student" title="Ajouter / Supprimer un Auditeur" look="info" collapsed="true">
-                        <b:row>
-                            <b:column mediumScreen="6">
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Prénom:"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputText placeholder="Prénom" value="#{personBean.firstName}"/>
-                                    </b:column>
+                  <b:column  span="6" >
+                  
+                    <b:accordion expanded-panels="add_student">
+                                    <b:panel span="7" id="add_student" title="Ajouter un Auditeur" look="info" collapsed="true">
+                                        <b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Prénom:"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputText placeholder="Prénom" value="#{personBean.firstName}"/>
+                                                    </b:column>
 
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Nom de famille"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputText placeholder="Nom de famille" value="#{personBean.lastName}"/>
-                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Nom de famille"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputText placeholder="Nom de famille" value="#{personBean.lastName}"/>
+                                                    </b:column>
 
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Courrier Electronique:"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputText placeholder="email@address.com" value="#{personBean.email}"/>
-                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Courrier Electronique:"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputText placeholder="email@address.com" value="#{personBean.email}"/>
+                                                    </b:column>
 
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Mot de Passe:"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputSecret placeholder="Mot de passe" value="#{personBean.passWord}"/>
-                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Mot de Passe:"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputSecret placeholder="Mot de passe" value="#{personBean.passWord}"/>
+                                                    </b:column>
 
-                                </b:row>
+                                                </b:row>
 
-                                <b:row>
-                                    <b:column span="2" offset="3">
-                                        <b:commandButton value="Ajouter"
-                                                         update="add_new_student student-table register_student_to_course"
-                                                         actionListener="#{personBean.submit(10)}" look="primary"/>
-                                    </b:column>
-                                </b:row>
+                                                <b:row>
+                                                    <b:column span="2" offset="3">
+                                                        <b:commandButton value="Ajouter"
+                                                                         update="add_student modify_student delete_student student-table register_student_to_course"
+                                                                         actionListener="#{personBean.submit(10)}" look="primary"/>
+                                                    </b:column>
+                                                </b:row>
 
-                            </b:column>
-                            <b:column mediumScreen="6">
 
-                                <b:row>
-                                    <b:column mediumScreen="2"><h:outputText value="Auditeur:"/></b:column>
-                                    <b:column mediumScreen="6">
-                                        <b:selectOneMenu value="#{personBean.person_id}">
-                                            <f:selectItems value="#{personBean.getPersonsByRole(10)}" var="p"
-                                                           itemValue="#{p.person_id}"
-                                                           itemLabel="#{p.firstName} #{p.lastName}"/>
-                                        </b:selectOneMenu>
-                                    </b:column>
+                                        </b:row>
+                                    </b:panel>
+                                    <b:panel span="7" id="modify_student" title="Modifier un Auditeur" look="info" collapsed="true">
+                                        <b:row> 
+                                                <b:row>
 
-                                    <b:column mediumScreen="1">
-                                        <b:commandButton value="Supprimer"
-                                                         update="add_new_student register_student_to_course @form:**:student-table"
-                                                         actionListener="#{personBean.remove}" look="danger"/>
-                                    </b:column>
-                                </b:row>
+                                                    <b:column mediumScreen="6">
+                                                        <b:selectOneMenu value="#{personBean.persIdMod}">
 
-                            </b:column>
-                        </b:row>
-                    </b:panel>
+                                                           <f:selectItem itemLabel="Selectionner un Auditeur" itemValue="" />
+                                                           <f:selectItems value="#{personBean.getPersonsByRole(10)}" var="p"
+                                                                           itemValue="#{p.person_id}"
+                                                                           itemLabel="#{p.firstName} #{p.lastName}"/>
+                                                        </b:selectOneMenu>
 
-                    <b:panel span="5" id="register_student_to_course" title="Inscription / Désinscription des cours"
+                                                     </b:column>
+
+                                                     <b:column mediumScreen="1">
+                                                        <b:commandButton value="Récupérer les détails"
+                                                                         update="@form:**:modifyPanel"
+                                                                         actionListener="#{personBean.initModify2}" look="primary"/>
+                                                    </b:column>
+                                                </b:row>
+                                                <b:row id="modifyPanel">
+                                                    <b:column mediumScreen="0"/>
+                                                    <b:column>    
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Prénom:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="Prénom" value="#{personBean.firstNameMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Nom de famille"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="Nom de famille" value="#{personBean.lastNameMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Courrier Electronique:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="email@address.com" value="#{personBean.emailMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Mot de Passe:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputSecret placeholder="Mot de passe" value="#{personBean.passWordMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                     <b:row>
+                                                        <b:column span="2" offset="3">
+                                                            <b:commandButton value="Modifier"
+                                                                             update="add_student modify_student delete_student register_student_to_course @form:**:student-table"
+                                                                             actionListener="#{personBean.modify}" look="primary"/>
+                                                        </b:column>
+                                                    </b:row>
+                                                   </b:column>
+                                                  
+                                                  </b:row>
+                                            
+                                        </b:row>
+                                    </b:panel>
+                                    <b:panel span="7" id="delete_student" title="Supprimer un Auditeur" look="info" collapsed="true">
+                                        <b:row>
+                                            <b:column mediumScreen="2"><h:outputText value="Auditeur:"/></b:column>
+                                            <b:column mediumScreen="6">
+                                                <b:selectOneMenu value="#{personBean.person_id}">
+                                                    <f:selectItems value="#{personBean.getPersonsByRole(10)}" var="p"
+                                                                   itemValue="#{p.person_id}"
+                                                                   itemLabel="#{p.firstName} #{p.lastName}"/>
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column mediumScreen="1">
+                                                <b:commandButton value="Supprimer"
+                                                                 update="add_student modify_student delete_student register_student_to_course @form:**:student-table"
+                                                                 actionListener="#{personBean.remove}" look="danger"/>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+                    </b:accordion>
+                  </b:column>
+                  <b:column   span="6" >
+
+                    <b:panel id="register_student_to_course" title="Inscription / Désinscription des cours"
                              look="info"
                              collapsed="true">
                         <b:row>
@@ -133,18 +209,19 @@
                             </b:column>
                             <b:column span="3">
                                 <b:commandButton value="Inscrire"
-                                                 update="add_new_student register_student_to_course @form:**:student-table"
+                                                 update="add_student modify_student delete_student register_student_to_course @form:**:student-table"
                                                  look="primary"
                                                  actionListener="#{registrationBean.submit}"/>
                             </b:column>
                             <b:column span="3">
                                 <b:commandButton value="Désinscrire"
-                                                 update="add_new_student register_student_to_course @form:**:student-table"
+                                                 update="add_student modify_student delete_student register_student_to_course @form:**:student-table"
                                                  look="danger"
                                                  actionListener="#{registrationBean.remove}"/>
                             </b:column>
                         </b:row>
                     </b:panel>
+                  </b:column>
                 </b:row>
 
                 <h:column>
@@ -179,88 +256,160 @@
 
         </b:panel>
 
-
         <b:panel id="teacher" title="Enseignant" look="primary">
 
 
-            <h:form>
-
+            <h:form id="formAddTeacher">
                 <b:row>
-                    <b:panel span="7" id="add_new_teacher" title="Ajouter / Supprimer un Enseignant" look="info"
-                             collapsed="true">
+                  <b:column  span="6" >
+                  
+                    <b:accordion expanded-panels="add_teacher">
+                                    <b:panel span="7" id="add_teacher" title="Ajouter un Enseignant" look="info" collapsed="true">
+                                        <b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Prénom:"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputText placeholder="Prénom" value="#{personBean.firstName}"/>
+                                                    </b:column>
 
-                        <b:row>
-                            <b:column medium-screen="6">
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Prénom:"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputText placeholder="Prénom" value="#{personBean.firstName}"/>
-                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Nom de famille"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputText placeholder="Nom de famille" value="#{personBean.lastName}"/>
+                                                    </b:column>
 
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Nom de Famille:"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputText placeholder="Nom de Famille" value="#{personBean.lastName}"/>
-                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Courrier Electronique:"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputText placeholder="email@address.com" value="#{personBean.email}"/>
+                                                    </b:column>
 
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Courrier Electronique"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputText placeholder="email@address.com" value="#{personBean.email}"/>
-                                    </b:column>
+                                                </b:row>
+                                                <b:row>
+                                                    <b:column medium-screen="3">
+                                                        <h:outputText value="Mot de Passe:"/>
+                                                    </b:column>
+                                                    <b:column medium-screen="7">
+                                                        <b:inputSecret placeholder="Mot de passe" value="#{personBean.passWord}"/>
+                                                    </b:column>
 
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="3">
-                                        <h:outputText value="Mot de Passe"/>
-                                    </b:column>
-                                    <b:column medium-screen="7">
-                                        <b:inputSecret placeholder="Mot de Passe" value="#{personBean.passWord}"/>
-                                    </b:column>
+                                                </b:row>
 
-                                </b:row>
-
-                                <b:row>
-                                    <b:column span="2" offset="3">
-                                        <b:commandButton value="Ajouter" actionListener="#{personBean.submit(20)}"
-                                                         update="@form"
-                                                         look="primary"/>
-
-                                    </b:column>
-                                </b:row>
-
-                            </b:column>
-                            <b:column mediumScreen="6">
-                                <b:row>
-                                    <b:column span="3"><h:outputText value="Enseignant:"/></b:column>
-                                    <b:column span="5">
-                                        <b:selectOneMenu value="#{personBean.person_id}">
-                                            <f:selectItems value="#{personBean.getPersonsByRole(20)}" var="p"
-                                                           itemValue="#{p.person_id}"
-                                                           itemLabel="#{p.firstName} #{p.lastName}"/>
-                                        </b:selectOneMenu>
-                                    </b:column>
+                                                <b:row>
+                                                    <b:column span="2" offset="3">
+                                                        <b:commandButton value="Ajouter"
+                                                                         update="add_teacher modify_teacher delete_teacher teacher-table register_teacher_to_course"
+                                                                         actionListener="#{personBean.submit(20)}" look="primary"/>
+                                                    </b:column>
+                                                </b:row>
 
 
-                                    <b:column mediumScreen="1">
-                                        <b:commandButton value="Supprimer" actionListener="#{personBean.remove}"
-                                                         update="@form"
-                                                         look="danger"/>
-                                    </b:column>
-                                </b:row>
-                            </b:column>
-                        </b:row>
-                    </b:panel>
+                                        </b:row>
+                                    </b:panel>
+                                    <b:panel span="7" id="modify_teacher" title="Modifier un Enseignant" look="info" collapsed="true">
+                                        <b:row> 
+                                                <b:row>
 
-                    <b:panel span="5" id="register_teacher_to_course" title="Inscription / Désinscription des Cours de l'Enseignant"
+                                                    <b:column mediumScreen="6">
+                                                        <b:selectOneMenu value="#{personBean.persIdMod}">
+
+                                                           <f:selectItem itemLabel="Selectionner un Enseignant" itemValue="" />
+                                                           <f:selectItems value="#{personBean.getPersonsByRole(20)}" var="p"
+                                                                           itemValue="#{p.person_id}"
+                                                                           itemLabel="#{p.firstName} #{p.lastName}"/>
+                                                        </b:selectOneMenu>
+
+                                                     </b:column>
+
+                                                     <b:column mediumScreen="1">
+                                                        <b:commandButton value="Récupérer les détails"
+                                                                         update="@form:**:modifyPanelTeacher"
+                                                                         actionListener="#{personBean.initModify2}" look="primary"/>
+                                                    </b:column>
+                                                </b:row>
+                                                <b:row id="modifyPanelTeacher">
+                                                    <b:column mediumScreen="0"/>
+                                                    <b:column>    
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Prénom:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="Prénom" value="#{personBean.firstNameMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Nom de famille"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="Nom de famille" value="#{personBean.lastNameMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Courrier Electronique:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="email@address.com" value="#{personBean.emailMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Mot de Passe:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputSecret placeholder="Mot de passe" value="#{personBean.passWordMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                     <b:row>
+                                                        <b:column span="2" offset="3">
+                                                            <b:commandButton value="Modifier"
+                                                                             update="add_teacher modify_teacher delete_teacher register_teacher_to_course @form:**:teacher-table"
+                                                                             actionListener="#{personBean.modify}" look="primary"/>
+                                                        </b:column>
+                                                    </b:row>
+                                                   </b:column>
+                                                  
+                                                  </b:row>
+                                            
+                                        </b:row>
+                                    </b:panel>
+                                    <b:panel span="7" id="delete_teacher" title="Supprimer un Enseignant" look="info" collapsed="true">
+                                        <b:row>
+                                            <b:column mediumScreen="2"><h:outputText value="Enseignant"/></b:column>
+                                            <b:column mediumScreen="6">
+                                                <b:selectOneMenu value="#{personBean.person_id}">
+                                                    <f:selectItems value="#{personBean.getPersonsByRole(20)}" var="p"
+                                                                   itemValue="#{p.person_id}"
+                                                                   itemLabel="#{p.firstName} #{p.lastName}"/>
+                                                </b:selectOneMenu>
+                                            </b:column>
+
+                                            <b:column mediumScreen="1">
+                                                <b:commandButton value="Supprimer"
+                                                                 update="add_teacher modify_teacher delete_teacher register_teacher_to_course @form:**:teacher-table"
+                                                                 actionListener="#{personBean.remove}" look="danger"/>
+                                            </b:column>
+                                        </b:row>
+                                    </b:panel>
+                    </b:accordion>
+                  </b:column>
+                  <b:column   span="6" >
+
+                    <b:panel id="register_teacher_to_course" title="Inscription / Désinscription des Cours de l'Enseignant"
                              look="info"
                              collapsed="true">
                         <b:row>
@@ -296,9 +445,11 @@
                             </b:column>
                         </b:row>
                     </b:panel>
+                  </b:column>
                 </b:row>
+
                 <h:column>
-                    <b:dataTable id="teacher-table" styleClass="table table-striped"
+                          <b:dataTable id="teacher-table" styleClass="table table-striped"
                                  value="#{personBean.getPersonsByRole(20)}"
                                  var="teacher" rows="15">
                         <b:column>
@@ -323,9 +474,10 @@
                         </b:column>
 
                     </b:dataTable>
+          </h:column>
 
-                </h:column>
             </h:form>
+
         </b:panel>
 
 
@@ -333,49 +485,105 @@
 
             <h:form id="course-form">
                 <b:row>
+                   <b:column span="5">
                     <h:form>
-                        <b:panel span="5" id="add-remove-course" title="Ajouter / Supprimer un Cours" look="info"
-                                 collapsed="true">
+                        <b:accordion expanded-panels="add_course">
+                          <b:panel span="7" id="add_course" title="Ajouter un Cours" look="info" collapsed="true">
+                                            <b:row>
+                                                <b:column medium-screen="2">
+                                                    <h:outputText value="Cours:"/>
+                                                </b:column>
+                                                <b:column medium-screen="7">
+                                                    <b:inputText placeholder="Cours"
+                                                                 value="#{courseBean.courseBeanName}"/>
+                                                </b:column>
 
-                            <b:row>
-                                <b:column medium-screen="2">
-                                    <h:outputText value="Cours:"/>
-                                </b:column>
-                                <b:column medium-screen="7">
-                                    <b:inputText placeholder="Cours"
-                                                 value="#{courseBean.courseBeanName}"/>
-                                </b:column>
+                                                <b:column medium-screen="2">
+                                                    <b:commandButton value="Ajouter" ajax="true"
+                                                                     actionListener="#{courseBean.submit}"
+                                                                     update="add_course modify_course delete_course :course-form:**:date-popup:**:course-picker :course-form:**:coursestable" look="primary"/>
+                                                </b:column>
 
-                                <b:column medium-screen="2">
-                                    <b:commandButton value="Ajouter" ajax="true"
-                                                     actionListener="#{courseBean.submit}"
-                                                     update="add-remove-course course-picker :course-form:**:coursestable" look="primary"/>
-                                </b:column>
+                                            </b:row>
 
-                            </b:row>
-                            <b:row>
-                                <b:column medium-screen="2">
-                                    <h:outputText value="Cours:"/>
-                                </b:column>
-                                <b:column medium-screen="7">
-                                    <b:selectOneMenu id="course-picker" value="#{courseBean.course_id}">
-                                        <f:selectItems value="#{courseBean.courses}" var="courses"
-                                                       itemValue="#{courses.course_id}"
-                                                       itemLabel="#{courses.courseName}"/>
-                                    </b:selectOneMenu>
+                          </b:panel>
+                          <b:panel span="7" id="modify_course" title="Modifier un Cours" look="info" collapsed="true">
 
-                                </b:column>
-                                <b:column medium-screen="2">
-                                    <b:commandButton value="Supprimer" ajax="true"
-                                                     actionListener="#{courseBean.remove}"
-                                                     update="add-remove-course course-picker :course-form:**:coursestable" look="danger"
-                                    />
-                                </b:column>
-                            </b:row>
-                        </b:panel>
+
+                                        <b:row> 
+                                                <b:row>
+
+                                                    <b:column mediumScreen="6">
+                         
+                                                        <b:selectOneMenu value="#{courseBean.courseIdMod}">
+                                                        <f:selectItem itemLabel="Selectionner un Cours" itemValue="" />
+                                                        <f:selectItems value="#{courseBean.courses}" var="courses"
+                                                                       itemValue="#{courses.course_id}"
+                                                                       itemLabel="#{courses.courseName}"/>
+                                                        </b:selectOneMenu>
+
+                                                     </b:column>
+
+                                                     <b:column mediumScreen="1">
+                                                        <b:commandButton value="Récupérer les détails"
+                                                                         update="@form:**:modifyPanelCourse"
+                                                                         actionListener="#{courseBean.initModify}" look="primary"/>
+                                                    </b:column>
+                                                </b:row>
+                                                <b:row id="modifyPanelCourse">
+                                                    <b:column mediumScreen="0"/>
+                                                    <b:column>    
+                                                    <b:row>
+                                                        <b:column medium-screen="3">
+                                                            <h:outputText value="Nom du Cours:"/>
+                                                        </b:column>
+                                                        <b:column medium-screen="7">
+                                                            <b:inputText placeholder="courseName" value="#{courseBean.courseBeanNameMod}"/>
+                                                        </b:column>
+
+                                                    </b:row>
+                                                     <b:row>
+                                                        <b:column span="2" offset="3">
+                                                            <b:commandButton value="Modifier"
+                                                                             update="add_course modify_course delete_course :course-form:**:date-popup:**:course-picker :course-form:**:coursestable"
+                                                                             actionListener="#{courseBean.modify}" look="primary"/>
+                                                        </b:column>
+                                                    </b:row>
+                                                   </b:column>
+                                                  
+                                                  </b:row>
+                                            
+                                        </b:row>
+
+
+                          </b:panel>
+                          <b:panel span="7" id="delete_course" title="Supprimer un Cours" look="info" collapsed="true">
+                                            <b:row>
+                                                <b:column medium-screen="2">
+                                                    <h:outputText value="Cours:"/>
+                                                </b:column>
+                                                <b:column medium-screen="7">
+                                                    <b:selectOneMenu id="course-picker" value="#{courseBean.course_id}">
+                                                        <f:selectItems value="#{courseBean.courses}" var="courses"
+                                                                       itemValue="#{courses.course_id}"
+                                                                       itemLabel="#{courses.courseName}"/>
+                                                    </b:selectOneMenu>
+
+                                                </b:column>
+                                                <b:column medium-screen="2">
+                                                    <b:commandButton value="Supprimer" ajax="true"
+                                                                     actionListener="#{courseBean.remove}"
+                                                                     update="add_course modify_course delete_course :course-form:**:date-popup:**:course-picker :course-form:**:coursestable" look="danger"
+                                                    />
+                                                </b:column>
+                                            </b:row>
+                          </b:panel>
+                       </b:accordion>
                     </h:form>
+                   </b:column>
+                   <b:column span="7">
                     <h:form id="date-popup">
-                        <b:panel span="7" id="add-new-lecture" title="Ajouter / Supprimer une Conférence" look="info"
+                        <b:panel id="add-new-lecture" title="Ajouter / Supprimer une Conférence" look="info"
                                  collapsed="true">
 
                             <b:row>
@@ -390,10 +598,11 @@
 
                                 <b:column span="1" offset="1"><h:outputText value="Date:"/></b:column>
                                 <b:column span="3">
-                                    <b:datepicker id="date-picker" value="#{lectureBean.lectureDate}"
-                                                  placeholder="yyyy-MM-dd" format="YYYY-MM-DD"
-                                                  show-week="true"
-                                                  changeYear="true" changeMonth="true" required="true"/>
+                                    <d:datePicker id="date-picker" value="#{lectureBean.lectureDate}"
+                                                  monthNavigator="true"  
+                                                  showButtonBar="true"
+                                                  required="true"
+                                                  pattern="dd-MM-yyyy"/>                               
                                 </b:column>
 
                                 <b:column span="1"><h:outputText value="Periode:"/></b:column>
@@ -432,6 +641,7 @@
 
                         </b:panel>
                     </h:form>
+                   </b:column>
                 </b:row>
 
                 <b:dataTable id="coursestable" styleClass="table table-striped" value="#{courseBean.courses}"

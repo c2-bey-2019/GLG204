@@ -20,6 +20,14 @@ public class CourseEjb
         em.persist(c);
     }
 
+    public void modifyCourse(Long course_id, String courseName)
+    { 
+        Course c = em.find(Course.class, course_id);
+        
+        c.setCourseName(courseName);
+        
+        em.merge(c);
+    }
     public void removeCourse(Long course_id)
     {
         Course c = em.find(Course.class, course_id);
@@ -35,6 +43,11 @@ public class CourseEjb
         return courses;
     }
     
+    public Course getCourseById(Long course_id)
+    {
+        Course c = em.find(Course.class, course_id);
+        return c;
+    }
     
     public List<Lecture> getLecturesByCourse(Long course_id)
     {

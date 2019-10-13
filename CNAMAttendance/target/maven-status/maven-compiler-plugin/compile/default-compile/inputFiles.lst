@@ -22,7 +22,6 @@
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/CirclesView.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/LectureEjb.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/Period.java
-/home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/util/PaginationHelper.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/AttendanceBean.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/CourseEjb.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/RegistrationEjb.java
@@ -35,6 +34,5 @@
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/util/ISSAE_Util.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/jpa/AttParameters.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/PersonEjb.java
-/home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ctr/util/JsfUtil.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/service/ApplicationConfig.java
 /home/mazen/CNAM/C2/GLG204/CNAMAttendance/src/main/java/ejb/AttParametersFacade.java

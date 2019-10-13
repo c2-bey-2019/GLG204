@@ -17,8 +17,6 @@ ejb/RegistrationEjb.class
 ejb/CourseEjb.class
 jpa/Classroom.class
 jpa/Attendance.class
-ctr/util/PaginationHelper.class
-ctr/util/JsfUtil.class
 ctr/CirclesView.class
 ctr/ClassroomBean.class
 ejb/AttParametersFacade.class
