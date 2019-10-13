@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.event.ValueChangeEvent;
 
 @Named
 @SessionScoped
@@ -25,6 +26,12 @@ public class PersonBean implements Serializable
     private String fullName;
     private List<Person> personByRole;
     private List<Course> courses;
+
+    private Long persIdMod;
+    private String firstNameMod;
+    private String lastNameMod;
+    private String emailMod;
+    private String passWordMod;
 
     @Inject
     private PersonEjb persEjb;
@@ -51,6 +58,34 @@ public class PersonBean implements Serializable
     public void remove()
     {
         persEjb.removePerson(this.person_id);
+    }
+
+    public void initModify(ValueChangeEvent event) {
+        this.persIdMod = Long.parseLong(event.getNewValue().toString());
+        Person p = persEjb.getPersonById(this.persIdMod);
+        this.setPersIdMod(p.getPerson_id());
+        this.setFirstNameMod(p.getFirstName());
+        this.setLastNameMod(p.getLastName());
+        this.setEmailMod(p.getEmail());
+        this.setPassWordMod(p.getPassWord());              
+   }
+    public void initModify2() {
+        Person p = persEjb.getPersonById(this.persIdMod);
+        this.setPersIdMod(p.getPerson_id());
+        this.setFirstNameMod(p.getFirstName());
+        this.setLastNameMod(p.getLastName());
+        this.setEmailMod(p.getEmail());
+        this.setPassWordMod(p.getPassWord());              
+    }
+    
+    public void modify()
+    {
+        persEjb.modifyPerson(this.persIdMod, this.firstNameMod, this.lastNameMod, this.emailMod, this.passWordMod);
+        setFirstNameMod("");
+        setLastNameMod("");
+        setEmailMod("");
+        setPassWordMod("");
+              
     }
 
     public String getFirstName()
@@ -131,6 +166,50 @@ public class PersonBean implements Serializable
     {
         courses = persEjb.getCoursesByPerson(person_id);
         
+    }
+
+    public Long getPersIdMod() {
+        return persIdMod;
+    }
+
+    public String getFirstNameMod() {
+        return firstNameMod;
+    }
+
+    public String getLastNameMod() {
+        return lastNameMod;
+    }
+
+    public String getEmailMod() {
+        return emailMod;
+    }
+
+    public String getPassWordMod() {
+        return passWordMod;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setPersIdMod(Long persIdMod) {
+        this.persIdMod = persIdMod;
+    }
+
+    public void setFirstNameMod(String firstNameMod) {
+        this.firstNameMod = firstNameMod;
+    }
+
+    public void setLastNameMod(String lastNameMod) {
+        this.lastNameMod = lastNameMod;
+    }
+
+    public void setEmailMod(String emailMod) {
+        this.emailMod = emailMod;
+    }
+
+    public void setPassWordMod(String passWordMod) {
+        this.passWordMod = passWordMod;
     }
 
 

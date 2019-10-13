@@ -54,10 +54,28 @@ public class PersonEjb
     
     }
 
+    public void modifyPerson(Long person_id, String firstName, String lastName, String email, String passWord)
+    { 
+        Person p = em.find(Person.class, person_id);
+        
+        p.setFirstName(firstName);
+        p.setLastName(lastName);
+        p.setEmail(email);
+        p.setPassWord(passWord);
+        
+        em.merge(p);
+    }
+
     public void removePerson(Long person_id)
     {
         Person c = em.find(Person.class, person_id);
         em.remove(c);
+    }
+
+    public Person getPersonById(Long person_id)
+    {
+        Person p = em.find(Person.class, person_id);
+        return p;
     }
 
     public List<Person> getPerson(String email)
