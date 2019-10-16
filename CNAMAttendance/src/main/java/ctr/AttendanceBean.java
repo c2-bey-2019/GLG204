@@ -251,7 +251,7 @@ public class AttendanceBean implements Serializable
         return studentAttendanceByCourse;
     }
 
-    public void setStudentAttendanceByCourse(long pers_id) {
+    public void setStudentAttendanceByCourse(Long pers_id) {
         this.studentAttendanceByCourse = attEjb.getStudentAttendanceByCourse(10L, course_id, pers_id);
     }
 
@@ -319,10 +319,6 @@ public class AttendanceBean implements Serializable
 
     public void setStudentsByCourse(List<Person> studentsByCourse) {
         this.studentsByCourse = studentsByCourse;
-    }
-
-    public void setStudentAttendanceByCourse(List<Attendance> studentAttendanceByCourse) {
-        this.studentAttendanceByCourse = studentAttendanceByCourse;
     }
 
     public void setAttEjb(AttendanceEjb attEjb) {

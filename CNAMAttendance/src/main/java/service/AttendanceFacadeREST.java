@@ -5,11 +5,13 @@
  */
 package service;
 
+import ejb.LoginEjb;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -22,13 +24,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import jpa.Attendance;
+import jpa.Person;
+import util.ISSAE_Util;
 
 /**
  *
  * @author mazen
  */
 @Stateless
-@Path("jpa.attendance")
+@Path("ISSAEServices")
 public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
 
     @PersistenceContext(unitName = "ISSAE_Attendance_war_1.0-SNAPSHOTPU")
@@ -65,17 +69,82 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
         super.edit(entity);
         
     }
-//    @PUT
-//    @Path("{id}/{latitude}/{longitude}")
-//    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-//    public void edit(@PathParam("id") Long id, @PathParam("latitude") Double lat, @PathParam("longitude") Double lng) {
-//   
-//        Attendance att = new Attendance();
-//        att = super.find(id);
-//        att.setLatitude(new BigDecimal(lat));
-//        att.setLongitude(new BigDecimal(lng));
-//        super.edit(att);
-//    }
+
+
+    @PUT
+    @Path("/StudentCheckIn/{id}/{latitude}/{longitude}")
+    @Consumes({MediaType.TEXT_PLAIN})
+    public String StudentCheckIn(@PathParam("id") Long id, @PathParam("latitude") Double lat, @PathParam("longitude") Double lng) {
+      try{
+        Attendance entity;
+        entity = super.find(id);
+        entity.setLatitude(new BigDecimal(lat));
+        entity.setLongitude(new BigDecimal(lng));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        entity.setLastCheckInDate(timestamp);
+        super.edit(entity);
+        return "Check In Succeeded";
+      }
+      catch (Exception e){
+       return "Check In Failed";   
+      }
+    }
+
+    @PUT
+    @Path("/StudentCheckIn2/{email}/{password}/{attendance_id}/{latitude}/{longitude}")
+    @Consumes({MediaType.TEXT_PLAIN})
+    public String StudentCheckIn2(@PathParam("email") String email, @PathParam("password") String passWord, @PathParam("attendance_id") Long id, @PathParam("latitude") Double lat, @PathParam("longitude") Double lng) {
+      try{
+        Boolean isLoggedin= false;
+        if(email.trim().length() <0){
+            return "courrier peut pas etre vide!";
+        }
+        if(passWord.trim().length() <0){
+            return "mot de passe peut pas etre vide!";
+        }
+        List<Person> persons;
+        persons = em.createQuery("SELECT p from Person p where locate(:filt, p.email) > 0")
+                    .setParameter("filt",email)
+                    .getResultList();
+        
+        
+        if(!persons.isEmpty())
+           {
+            Person person = persons.get(0);
+            
+            if(!person.getPassWord().equals(passWord))
+                return "Incorrect Password";
+            else if(person.getRole().getRole_id() != 10)
+                return "Login User is an admin or a teacher, not a student";
+            else if(person.getPassWord().equals(passWord) && person.getRole().getRole_id() == 10)
+                isLoggedin=true;
+           }
+        else {
+              return "Incorrect UserName";
+             };
+      
+          
+        Attendance entity;
+        entity = super.find(id);
+        
+        if (!(entity.getPerson().getPerson_id()== persons.get(0).getPerson_id()))
+        {
+            return "Incorrect Attendance Id";
+        }
+        
+        
+        entity.setLatitude(new BigDecimal(lat));
+        entity.setLongitude(new BigDecimal(lng));
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        entity.setLastCheckInDate(timestamp);
+        super.edit(entity);
+        return "Check In Succeeded";
+      }
+      catch (Exception e){
+       return "Check In Failed : " + e.getMessage();   
+      }
+    }
+
 
     @DELETE
     @Path("{id}")
