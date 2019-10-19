@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.json.Json;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
@@ -23,9 +24,18 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import jpa.Attendance;
 import jpa.Person;
 import util.ISSAE_Util;
+import com.google.gson.Gson; 
+import com.google.gson.JsonParser;
+import java.io.StringWriter;
+import java.io.Writer;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonWriter;
+
 
 /**
  *
@@ -72,28 +82,9 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
 
 
     @PUT
-    @Path("/StudentCheckIn/{id}/{latitude}/{longitude}")
+    @Path("/StudentCheckIn/{email}/{password}/{attendance_id}/{latitude}/{longitude}")
     @Consumes({MediaType.TEXT_PLAIN})
-    public String StudentCheckIn(@PathParam("id") Long id, @PathParam("latitude") Double lat, @PathParam("longitude") Double lng) {
-      try{
-        Attendance entity;
-        entity = super.find(id);
-        entity.setLatitude(new BigDecimal(lat));
-        entity.setLongitude(new BigDecimal(lng));
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        entity.setLastCheckInDate(timestamp);
-        super.edit(entity);
-        return "Check In Succeeded";
-      }
-      catch (Exception e){
-       return "Check In Failed";   
-      }
-    }
-
-    @PUT
-    @Path("/StudentCheckIn2/{email}/{password}/{attendance_id}/{latitude}/{longitude}")
-    @Consumes({MediaType.TEXT_PLAIN})
-    public String StudentCheckIn2(@PathParam("email") String email, @PathParam("password") String passWord, @PathParam("attendance_id") Long id, @PathParam("latitude") Double lat, @PathParam("longitude") Double lng) {
+    public String studentCheckIn(@PathParam("email") String email, @PathParam("password") String passWord, @PathParam("attendance_id") Long id, @PathParam("latitude") Double lat, @PathParam("longitude") Double lng) {
       try{
         Boolean isLoggedin= false;
         if(email.trim().length() <0){
@@ -180,9 +171,88 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
         return String.valueOf(super.count());
     }
 
+    @GET
+    @Path("/getStudentAttendance/{email}/{password}")
+    @Consumes({MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public String getStudentAttendance(@PathParam("email") String email, @PathParam("password") String passWord) {
+    
+      try{
+          
+        Boolean isLoggedin= false;
+        if(email.trim().length() <0){
+            return "courrier peut pas etre vide!";
+        }
+        if(passWord.trim().length() <0){
+            return "mot de passe peut pas etre vide!";
+        }
+        
+        List<Person> persons;
+        persons = em.createQuery("SELECT p from Person p where locate(:filt, p.email) > 0")
+                    .setParameter("filt",email)
+                    .getResultList();
+        
+        
+        if(!persons.isEmpty())
+           {
+            Person person = persons.get(0);
+            
+            if(!person.getPassWord().equals(passWord))
+                return "Incorrect Password";
+            else if(person.getRole().getRole_id() != 10)
+                return "Login User is an admin or a teacher, not a student";
+            else if(person.getPassWord().equals(passWord) && person.getRole().getRole_id() == 10)
+                isLoggedin=true;
+           }
+        else {
+              return "Incorrect UserName";
+             };
+      
+          
+        List<Attendance> attList;
+        attList = em.createQuery("SELECT a FROM Attendance a JOIN Person p ON p.person_id=a.person.person_id JOIN Lecture l ON l.lecture_id=a.lecture.lecture_id WHERE p.person_id = ?1 ORDER BY p.firstName")
+                    .setParameter(1,persons.get(0).getPerson_id())
+                    .getResultList();
+        
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+    
+        for (int i = 0; i < attList.size(); i++) {
+           System.out.println(attList.get(i));
+                
+           jsonArrayBuilder
+                .add(Json.createObjectBuilder()
+                    .add("attendance_id", attList.get(i).getAttendance_id())
+                    .add("date", attList.get(i).getLecture().getDateFormated())
+                    .add("period", attList.get(i).getLecture().getPeriod().getPeriodDesc(attList.get(i).getLecture().getDate()))
+                    .add("classroom", attList.get(i).getLecture().getClassroom().getClassroomName())
+                    );
+
+       }        
+
+        JsonArray jsonArray = jsonArrayBuilder.build();
+
+        StringWriter stringWriter = new StringWriter();
+        JsonWriter jsonWriter = Json.createWriter(stringWriter);
+        jsonWriter.writeArray(jsonArray);
+        jsonWriter.close();
+
+        return stringWriter.toString();
+        
+        
+
+        
+      }
+      catch (Exception e){
+         return "Error Occured : " + e.getMessage();   
+      }
+    }
+    
+    
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
+ 
     
 }

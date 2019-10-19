@@ -58,10 +58,10 @@ public class Attendance
     @Column(name = "LAST_CHECK_IN_DATE")
     private Timestamp lastCheckInDate;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne (cascade = CascadeType.MERGE)
     private Person person;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne (cascade = CascadeType.MERGE)
     private Lecture lecture;
 
 

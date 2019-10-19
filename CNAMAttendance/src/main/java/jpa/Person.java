@@ -23,10 +23,10 @@ import java.util.List;
 
 public class Person
 {
-    @OneToMany(mappedBy = "person", orphanRemoval = true)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.REMOVE)
     private List<Registration> registration;
 
-    @OneToMany(mappedBy = "person", orphanRemoval = true)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.REMOVE)
     private List<Attendance> attendance;
 
     @ManyToOne

@@ -119,10 +119,10 @@ public class AttendanceBean implements Serializable
             }
         catch (EJBException ejbe)
         {
-            return "teacher_map?faces-redirect=true";
+            return "show_checkins_on_map?faces-redirect=true";
 
         }
-        return "teacher_map?faces-redirect=true";
+        return "show_checkins_on_map?faces-redirect=true";
     }
 
 
@@ -220,16 +220,13 @@ public class AttendanceBean implements Serializable
         return "attendance?faces-redirect=true";
     }
     
-    public String returnToTeachersPage()
-    {
-        return "teacher_panel?faces-redirect=true";
-    }
 
     public String showMap() 
     {
+    this.submit();
     this.refreshStudentsCheckedInByAttendance();    
     this.setDisplayLocation(new BigDecimal(33.892954), new BigDecimal(35.497281));
-    return "/teacher_map.xhtml?faces-redirect=true";
+    return "/show_checkins_on_map.xhtml?faces-redirect=true";
     }
     
     public String studentChekInByAttendance(Long att_id) {

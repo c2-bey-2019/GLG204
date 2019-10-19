@@ -57,7 +57,14 @@ public class PersonBean implements Serializable
 //TODO check why not removing teacher
     public void remove()
     {
-        persEjb.removePerson(this.person_id);
+      try{
+          persEjb.removePerson(this.person_id);
+         }
+       catch (EJBException ejbe)
+        {
+            return;
+
+        }
     }
 
     public void initModify(ValueChangeEvent event) {
@@ -212,5 +219,14 @@ public class PersonBean implements Serializable
         this.passWordMod = passWordMod;
     }
 
+    public String returnToMainPage(Long persId)
+    { 
+        if      (persEjb.getPersonById(persId).getRole().getRole_id() == 30)
+          return "admin_panel?faces-redirect=true";
+      else if (persEjb.getPersonById(persId).getRole().getRole_id() == 20)
+          return "teacher_panel?faces-redirect=true";
+      else
+          return "student_panel?faces-redirect=true";
+    }
 
 }

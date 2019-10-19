@@ -96,4 +96,6 @@ public class LoginBean implements Serializable
 
     public void restorePassword(ActionEvent actionEvent) {
     }
+    
+    
 }
