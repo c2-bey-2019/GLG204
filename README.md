@@ -1,4 +1,5 @@
 # CNAM Attendance
+# http://35.209.220.27:8080/CNAMAttendance/
 
 ## Quick Description
 
@@ -29,10 +30,10 @@ CNAM People is a Web Application that allows CNAM Administration to consolidate 
 
 CNAM People est une application Web qui permet à l’administration CNAM de regrouper les informations relatives à leurs employés dans un seul répertoire, leur permettant d’ajouter, d’éditer, de rechercher et de supprimer facilement des employés, afin de refléter en permanence le nombre réel de personnes dans l’organisation et leurs informations actuelles.
 
-Technologies Used:
-Framework: Java Server Faces (JSF) 2.0 (MVC design pattern)
-IDE: Eclipse Eclipse (Oxygen) for Java EE Developers
-Java JDK :1.8
+Technologies Used:  
+Framework: Java Server Faces (JSF) 2.0 (MVC design pattern)  
+IDE: Eclipse Eclipse (Oxygen) for Java EE Developers  
+Java JDK :1.8  
 Application Server: Apache Tomcat 9
 
 Needs 1 more fine tuning related to the dashboard.
@@ -80,3 +81,4 @@ Future development tasks:
 * Adding JSF Facet to Existing Project in Eclipse Oxygen [click here](https://help.eclipse.org/kepler/topic/org.eclipse.jst.jsf.doc.user/html/tasks/add_jsf_facet.html)
 * How to solve ‘Starting Tomcat Server at localhost’ has encountered a problem [click here](https://www.youtube.com/watch?v=qB3ETbAU1NY)
 * Install GlassFish Tools in Eclipse Oxygen [click here](https://download.eclipse.org/glassfish-tools/1.0.0/repository/)
+* Markdown Documentation [click here](https://daringfireball.net/projects/markdown/syntax#p)
