@@ -32,5 +32,12 @@ public class PeriodEjb
                 .getResultList();
         return periods;
     }
-       
+ 
+    public Period getPeriodByCode(String periodCode)
+    {
+        Period p = em.find(Period.class, periodCode);
+        return p;
+    }
+        
+    
 }

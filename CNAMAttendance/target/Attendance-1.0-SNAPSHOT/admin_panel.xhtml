@@ -625,9 +625,10 @@
                                 </b:column>
                                 
                                 <b:column span="2">
-                                    <b:commandButton value="Ajouter"
+                                    <b:commandButton value="Ajouter" id ="add_lecture"
                                                      actionListener="#{lectureBean.submit}" look="primary"
                                                      update="add-new-lecture :course-form:**:coursestable"/>
+                                    <h:message for="add_lecture" />
                                 </b:column>
 
                                 <b:column span="1">

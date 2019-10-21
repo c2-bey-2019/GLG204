@@ -93,6 +93,103 @@ public class AttendanceBean implements Serializable
         return "admin_panel?faces-redirect=true";
     }
 
+    
+    public void removeAttendanceByLecture(Long lectureId)
+    {
+        try
+            {
+
+            for(Attendance attendance: attEjb.selectAllAttendanceByLecture(lectureId)) {
+             try
+              {
+                attEjb.removeAttendance(attendance.getAttendance_id());
+              }
+               catch (EJBException ejbe)
+                {
+                  System.out.println(ejbe.toString());
+                }
+            }
+
+            }
+        catch (EJBException ejbe)
+        {
+            System.out.println(ejbe.toString());
+        }
+        
+    }
+
+    public void removeAttendanceByCourse(Long courseId)
+    {
+        try
+            {
+
+            for(Attendance attendance: attEjb.selectAllAttendanceByCourse(courseId)) {
+             try
+              {
+                attEjb.removeAttendance(attendance.getAttendance_id());
+              }
+               catch (EJBException ejbe)
+                {
+                  System.out.println(ejbe.toString());
+                }
+            }
+
+            }
+        catch (EJBException ejbe)
+        {
+            System.out.println(ejbe.toString());
+        }
+        
+    }
+
+    public void removeAttendanceByPerson(Long personId)
+    {
+        try
+            {
+
+            for(Attendance attendance: attEjb.selectAllAttendanceByPerson(personId)) {
+             try
+              {
+                attEjb.removeAttendance(attendance.getAttendance_id());
+              }
+               catch (EJBException ejbe)
+                {
+                  System.out.println(ejbe.toString());
+                }
+            }
+
+            }
+        catch (EJBException ejbe)
+        {
+            System.out.println(ejbe.toString());
+        }
+        
+    }
+    
+    public void removeAttendanceByPersonAndCourse(Long personId, Long courseId)
+    {
+        try
+            {
+
+            for(Attendance attendance: attEjb.selectAllAttendanceByPersonAndCourse(personId, courseId)) {
+             try
+              {
+                attEjb.removeAttendance(attendance.getAttendance_id());
+              }
+               catch (EJBException ejbe)
+                {
+                  System.out.println(ejbe.toString());
+                }
+            }
+
+            }
+        catch (EJBException ejbe)
+        {
+            System.out.println(ejbe.toString());
+        }
+        
+    }
+    
     public String refreshStudentsCheckedInByAttendance()
     {
         
@@ -345,6 +442,7 @@ public class AttendanceBean implements Serializable
     public BigDecimal getLongitude() {
         return longitude;
     }
+
     
     public void setDisplayLocation(BigDecimal latitude, BigDecimal longitude) {
        this.latitude = latitude;

@@ -36,6 +36,9 @@ public class PersonBean implements Serializable
     @Inject
     private PersonEjb persEjb;
 
+    @Inject
+    private AttendanceBean attBean;
+
     public String submit(Long role_id)
     {
         try {
@@ -58,6 +61,7 @@ public class PersonBean implements Serializable
     public void remove()
     {
       try{
+          attBean.removeAttendanceByPerson(this.person_id);
           persEjb.removePerson(this.person_id);
          }
        catch (EJBException ejbe)

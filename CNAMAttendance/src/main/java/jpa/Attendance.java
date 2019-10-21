@@ -31,6 +31,18 @@ import javax.validation.constraints.NotNull;
                 name = "selectStudentsByAttendance",
                 query = "SELECT a FROM Attendance a JOIN Person p ON p.person_id=a.person.person_id WHERE p.role.role_id = ?1  AND a.lecture.lecture_id = ?2 ORDER BY p.firstName"),
         @NamedQuery(
+                name = "selectAllAttendanceByLecture",
+                query = "SELECT a FROM Attendance a WHERE a.lecture.lecture_id = ?1"),
+        @NamedQuery(
+                name = "selectAllAttendanceByCourse",
+                query = "SELECT a FROM Attendance a WHERE a.lecture.course.course_id = ?1"),
+        @NamedQuery(
+                name = "selectAllAttendanceByPerson",
+                query = "SELECT a FROM Attendance a WHERE a.person.person_id = ?1"),
+        @NamedQuery(
+                name = "selectAllAttendanceByPersonAndCourse",
+                query = "SELECT a FROM Attendance a WHERE a.person.person_id = ?1 AND a.lecture.course.course_id = ?2"),
+        @NamedQuery(
                 name = "selectStudentAttendanceByCourse",
                 query = "SELECT a FROM Attendance a JOIN Person p ON p.person_id=a.person.person_id JOIN Lecture l ON l.lecture_id=a.lecture.lecture_id WHERE p.role.role_id = ?1  AND l.course.course_id = ?2  AND p.person_id = ?3 ORDER BY p.firstName")
 })

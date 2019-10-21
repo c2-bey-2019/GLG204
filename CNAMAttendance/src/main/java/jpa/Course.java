@@ -11,6 +11,9 @@ import java.util.List;
                 name = "selectAllCourses",
                 query = "SELECT c FROM Course c ORDER BY c.courseName"),
         @NamedQuery(
+                name = "selectAllRegistrationsByCourse",
+                query = "SELECT r FROM Registration r WHERE r.course.course_id = ?1 and r.person.role.role_id=10"),
+        @NamedQuery(
                 name = "selectCourseName",
                 query = "SELECT c FROM Course c WHERE c.courseName LIKE :courseName ORDER BY c.courseName")})
 

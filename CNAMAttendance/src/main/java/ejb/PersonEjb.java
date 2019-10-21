@@ -115,11 +115,8 @@ public class PersonEjb
                 .setParameter(1, person_id)
                 .getResultList();
   
-//        courses = em.createNamedQuery(
-//                "selectAllCourses")
-//                .getResultList();
-
         return courses;
     }
+ 
 
 }

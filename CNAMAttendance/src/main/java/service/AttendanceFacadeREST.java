@@ -215,11 +215,12 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
                     .getResultList();
         
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
-    
+        Date currentDate = new Date(); 
+        
         for (int i = 0; i < attList.size(); i++) {
-           System.out.println(attList.get(i));
-                
-           jsonArrayBuilder
+           //System.out.println(attList.get(i));
+           if (attList.get(i).getLecture().getDate().compareTo(currentDate) > 0)      
+              jsonArrayBuilder
                 .add(Json.createObjectBuilder()
                     .add("attendance_id", attList.get(i).getAttendance_id())
                     .add("date", attList.get(i).getLecture().getDateFormated())
