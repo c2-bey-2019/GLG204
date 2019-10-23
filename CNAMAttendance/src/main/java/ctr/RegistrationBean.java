@@ -1,5 +1,8 @@
 package ctr;
 
+import ejb.AttendanceEjb;
+import ejb.LectureEjb;
+import ejb.PersonEjb;
 import ejb.RegistrationEjb;
 import jpa.Course;
 import jpa.Person;
@@ -11,6 +14,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
+import jpa.Attendance;
+import jpa.Lecture;
 
 @Named
 @SessionScoped
@@ -26,7 +31,19 @@ public class RegistrationBean implements Serializable
     @Inject
     private RegistrationEjb regEjb;
 
+    @Inject
+    private AttendanceEjb attEjb;
 
+    @Inject
+    private AttendanceBean attBean;
+
+    @Inject
+    private LectureEjb lectureEjb;
+    
+    @Inject
+    private PersonEjb persEjb;
+
+        
     public String submit()
     {
         try {
@@ -39,12 +56,26 @@ public class RegistrationBean implements Serializable
             return "registration?faces-redirect=true";
 
         }
-
+        if (persEjb.getPersonById(getPerson_id()).getRole().getRole_id() == 10L) {
+        
+            for(Lecture lecture: lectureEjb.getLecturesByCourse(getCourse_id())) {
+                 try
+                  {
+                    Attendance attendance = new Attendance(new Person(getPerson_id()), lecture, false);
+                    attEjb.addAttendance(attendance);
+                  }
+                   catch (EJBException ejbe)
+                    {
+                      System.out.println(ejbe.toString());
+                    }
+             }
+        }
         return "registration?faces-redirect=true";
     }
 
     public void remove()
     {
+        attBean.removeAttendanceByPersonAndCourse(person_id, course_id);
         regEjb.removeRegistration(person_id, course_id);
     }
 

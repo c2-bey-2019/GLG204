@@ -173,8 +173,46 @@ function CheckInByAttendance4() {
              alert(this.responseText);
          }
     };
-    //alert("2 http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/StudentCheckIn2/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value+"/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value);
-    xhttp.open("PUT", "http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/StudentCheckIn2/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value+"/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value, true);
+    xhttp.open("PUT", "http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/StudentCheckIn/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value+"/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value, true);
+    xhttp.send();
+   
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+ 
+    //alert("http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/studentCheckIn/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value+"/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value);
+}
+function CheckInByAttendance5() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+    
+    
+    xhttp.open("PUT", window.location.protocol + "//" + window.location.host+"/CNAMAttendance/webresources/ISSAEServices/StudentCheckIn/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value+"/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value, true);
+    xhttp.send();
+   
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+ 
+    //alert(window.location.protocol + "//" + window.location.host+"/CNAMAttendance/webresources/ISSAEServices/StudentCheckIn/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value+"/"+document.getElementById("AttendanceId").value+"/"+document.getElementById("Latitude").value+"/"+document.getElementById("Longitude").value);
+}
+
+function getstudentAttendance() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+         if (this.readyState == 4 && this.status == 200) {
+             alert(this.responseText);
+         }
+    };
+    xhttp.open("GET", "http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance/mazen/mazenmazen", true);
     xhttp.send();
    
     xhttp.onreadystatechange = function() {
@@ -186,7 +224,7 @@ function CheckInByAttendance4() {
     //alert("Check In Succeeded");
 }
 
-    function goBack() {
+function goBack() {
   window.history.back();
 }
 </script>
@@ -227,7 +265,8 @@ function CheckInByAttendance4() {
  <table>
   <tr>
     <td width="5%"></td>
-    <td><input type="button" value="Vérifier la présence" onclick="CheckInByAttendance4()"/></td>
+ 
+    <td><input type="button" value="Vérifier la présence" onclick="CheckInByAttendance5()"/></td>
     <td><input type="button" value="Retourner à la page principale" onclick="goBack()"/></td>
     <td width="5%"></td>
   </tr>

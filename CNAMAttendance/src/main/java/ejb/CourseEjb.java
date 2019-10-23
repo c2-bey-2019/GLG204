@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import jpa.Lecture;
+import jpa.Person;
+import jpa.Registration;
 
 @Stateless
 public class CourseEjb
@@ -57,6 +59,17 @@ public class CourseEjb
                 .setParameter(1, course_id)
                 .getResultList();
         return lecturesByCourse;
+    }
+
+    public List<Registration> getAllRegistrationsByCourse(Long course_id)
+    {
+        List<Registration> registrations;
+        registrations = em.createNamedQuery(
+                "selectAllRegistrationsByCourse", Registration.class)
+                .setParameter(1, course_id)
+                .getResultList();
+  
+        return registrations;
     }
     
 }

@@ -22,6 +22,13 @@ public class AttendanceEjb
         em.persist(a);
     }
 
+    public String removeAttendance(Long attendance_id)
+    {
+        Attendance a = em.find(Attendance.class, attendance_id);
+        em.remove(a);
+        return "admin_panel?faces-redirect=true";
+    }
+    
     public void markAttendance(Long attendance_id, boolean pres)
     {
         Attendance a = em.find(Attendance.class, attendance_id);
@@ -93,6 +100,46 @@ public class AttendanceEjb
         return attListBylecture;
     }
 
+   public List<Attendance> selectAllAttendanceByLecture(Long lecture_id)
+    {
+        List<Attendance> attListBylecture;
+        attListBylecture = em.createNamedQuery(
+                "selectAllAttendanceByLecture", Attendance.class)
+                .setParameter(1, lecture_id)
+                .getResultList();
+        return attListBylecture;
+    }
+
+   public List<Attendance> selectAllAttendanceByCourse(Long course_id)
+    {
+        List<Attendance> attListBylecture;
+        attListBylecture = em.createNamedQuery(
+                "selectAllAttendanceByCourse", Attendance.class)
+                .setParameter(1, course_id)
+                .getResultList();
+        return attListBylecture;
+    }
+    
+   public List<Attendance> selectAllAttendanceByPerson(Long person_id)
+    {
+        List<Attendance> attListBylecture;
+        attListBylecture = em.createNamedQuery(
+                "selectAllAttendanceByPerson", Attendance.class)
+                .setParameter(1, person_id)
+                .getResultList();
+        return attListBylecture;
+    }
+    
+   public List<Attendance> selectAllAttendanceByPersonAndCourse(Long person_id, Long course_id)
+    {
+        List<Attendance> attListBylecture;
+        attListBylecture = em.createNamedQuery(
+                "selectAllAttendanceByPersonAndCourse", Attendance.class)
+                .setParameter(1, person_id)
+                .setParameter(2, course_id)
+                .getResultList();
+        return attListBylecture;
+    }
     
     
     public List<Person> getStudentsByLecture(Long role_id, Long course_id, Long lecture_id)
