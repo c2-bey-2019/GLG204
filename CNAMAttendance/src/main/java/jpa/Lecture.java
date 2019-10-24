@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(
         name = "Lecture",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"course_course_id", "date"})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"course_course_id", "date","period_periodcode"})
 )
 @NamedQueries(
         {
@@ -22,8 +22,8 @@ import java.util.List;
                         query = "SELECT leb FROM Lecture leb WHERE (leb.course.course_id = ?1) ORDER BY leb.date"),
 
                 @NamedQuery(
-                        name = "selectLecturesByCourseAndDate",
-                        query = "SELECT leb FROM Lecture leb WHERE (leb.course.course_id = ?1 AND leb.date = ?2) ORDER BY leb.date")
+                        name = "selectLecturesByCourseAndDateAndPeriod",
+                        query = "SELECT leb FROM Lecture leb WHERE (leb.course.course_id = ?1 AND leb.date = ?2 AND leb.period.periodCode = ?3) ORDER BY leb.date, leb.period.periodCode")
 
 
         }

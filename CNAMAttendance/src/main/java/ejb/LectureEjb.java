@@ -36,9 +36,9 @@ public class LectureEjb
         em.persist(l);
     }
 
-    public String removeLecture(Long course_id, Date lectureDate)
+    public String removeLecture(Long course_id, Date lectureDate, String period_code)
     {
-        List<Lecture> r = getLecturesByCourse(course_id, lectureDate);
+        List<Lecture> r = getLecturesByCourseAndDateAndPeriod(course_id, lectureDate, period_code);
 
         if(!r.isEmpty()) {
             em.remove(r.get(0));
@@ -66,15 +66,16 @@ public class LectureEjb
         return lecturesByCourse;
     }
 
-    public List<Lecture> getLecturesByCourse(Long course_id, Date lectureDate)
+    public List<Lecture> getLecturesByCourseAndDateAndPeriod(Long course_id, Date lectureDate, String period_code)
     {
-        List<Lecture> lecturesByCourseAndDate;
-        lecturesByCourseAndDate = em.createNamedQuery(
-                "selectLecturesByCourseAndDate", Lecture.class)
+        List<Lecture> lecturesByCourseAndDateAndPeriod;
+        lecturesByCourseAndDateAndPeriod = em.createNamedQuery(
+                "selectLecturesByCourseAndDateAndPeriod", Lecture.class)
                 .setParameter(1, course_id)
                 .setParameter(2, lectureDate)
+                .setParameter(3, period_code)
                 .getResultList();
-        return lecturesByCourseAndDate;
+        return lecturesByCourseAndDateAndPeriod;
     }
 
 

@@ -1,6 +1,9 @@
 package ctr;
 
+import ejb.AttendanceEjb;
+import ejb.CourseEjb;
 import ejb.LectureEjb;
+import ejb.PeriodEjb;
 import jpa.Course;
 import jpa.Lecture;
 
@@ -9,10 +12,16 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import jpa.Attendance;
 import jpa.Classroom;
 import jpa.Period;
+import jpa.Person;
+import jpa.Registration;
+import util.ISSAE_Util;
 
 @Named
 @SessionScoped
@@ -34,23 +43,115 @@ public class LectureBean implements Serializable
     @Inject
     private LectureEjb lecEjb;
 
+    @Inject
+    private AttendanceBean attBean;
+
+    @Inject
+    private AttendanceEjb attEjb;
+    
+    @Inject
+    private CourseEjb courseEjb;
+    
+    @Inject
+    private PeriodEjb periodEjb;
+    
+    public int checkPeriodValidity(Date date, String periodCode) {
+        SimpleDateFormat simpleDateformat = new SimpleDateFormat("E"); // the day of the week abbreviated
+        System.out.println(simpleDateformat.format(date));
+
+        
+        Period p = periodEjb.getPeriodByCode(periodCode);
+        
+        if (("Sun".equals((String)simpleDateformat.format(date))))
+                return 0;
+        else if (!("Sat".equals((String)simpleDateformat.format(date)))
+                &&
+                 p.getUsedInMondayToFriday() == (int)0
+                )
+                 return 1;
+        else if (("Sat".equals((String)simpleDateformat.format(date)))
+                &&
+                 p.getUsedInSaturday() == (int)0
+                )
+                 return 2;
+        else
+                 return 3;
+    }
+
     public String submit()
     {
         try {
+            int resCheck = checkPeriodValidity(getLectureDate(), getPeriodCode());
+            if     (resCheck == 0) 
+               {
+                 ISSAE_Util.addErrorMessage("add_lecture","ne selectionnez pas un Dimanche!");
+                 return "incorrect_date";
+               }
+            else if (resCheck == 1)
+               {
+                ISSAE_Util.addErrorMessage("add_lecture","Periode non valable!");
+                return "incorrect_period_1";
+               }
+            else if (resCheck == 2)
+               {
+                ISSAE_Util.addErrorMessage("add_lecture","Periode non valable!");
+                return "incorrect_period_2";            
+               }  
+            
             lecEjb.addLecture(new Lecture(new Course(getCourse_id()), getLectureDate(), new Period(getPeriodCode()),new Classroom(getClassroom_id())));
         }
         catch (EJBException ejbe)
         {
             return "lecture?faces-redirect=true";
+        }
+        
+        //attBean.setCourse_id(this.getCourse_id());
+        //attBean.submit();
+        this.lecture_id = lecEjb.getLecturesByCourseAndDateAndPeriod(this.getCourse_id(), this.getLectureDate(),this.getPeriodCode()).get(0).getLecture_id();
+        try
+            {
+            for(Registration reg: courseEjb.getAllRegistrationsByCourse(this.getCourse_id())) {
+                 try
+                  {
+                    Attendance attendance = new Attendance(reg.getPerson(), new Lecture(this.lecture_id), false);
+                    attEjb.addAttendance(attendance);
+                  }
+                   catch (EJBException ejbe)
+                    {
+                      continue;
+                    }
+               
+            }
+            }
+        catch (EJBException ejbe)
+        {
+            return "admin_panel?faces-redirect=true";
 
         }
-//        setLectureDate(null);
+
+        
+        
+        //setLectureDate(null);
         return "lecture?faces-redirect=true";
     }
 
     public void remove()
     {
-        lecEjb.removeLecture(course_id, lectureDate);
+        try
+            {        
+              this.lecture_id = lecEjb.getLecturesByCourseAndDateAndPeriod(this.getCourse_id(), this.getLectureDate(),this.getPeriodCode()).get(0).getLecture_id();
+              attBean.removeAttendanceByLecture(this.getLecture_id());
+              lecEjb.removeLecture(course_id, lectureDate, periodCode);
+             }
+        catch (EJBException ejbe)
+        {
+            System.out.println(ejbe.toString());
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.toString());
+        }
+        
     }
 
     public Date getLectureDate()

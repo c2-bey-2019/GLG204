@@ -32,6 +32,8 @@ public class CourseBean implements Serializable
     @Inject
     private CourseEjb courseEjb;
 
+    @Inject
+    private AttendanceBean attBean;
 
     public String submit()
     {
@@ -48,7 +50,8 @@ public class CourseBean implements Serializable
 
     public void remove()
     {
-        courseEjb.removeCourse(this.course_id);
+      attBean.removeAttendanceByCourse(this.course_id);
+      courseEjb.removeCourse(this.course_id);
     }
 
 

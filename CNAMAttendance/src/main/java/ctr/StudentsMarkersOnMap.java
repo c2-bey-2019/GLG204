@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -57,14 +58,17 @@ public class StudentsMarkersOnMap implements Serializable
     public void Refresh(List<Attendance> studentsByAttendance) {
         this.init();
   
-
         for (Attendance stuAtt : studentsByAttendance) {
-            LatLng coordStu = new LatLng(stuAtt.getLatitude().doubleValue() , stuAtt.getLongitude().doubleValue());
-
-           this.advancedModel.addOverlay(new Marker(coordStu, stuAtt.getPerson().getFirstName() + " " + stuAtt.getPerson().getLastName(),"xxx.png","https://maps.google.com/mapfiles/ms/micons/yellow-dot.png"));
-  //          this.advancedModel.addOverlay(new Marker(coordStu, stuAtt.getPerson().getFirstName() + " " + stuAtt.getPerson().getLastName()));
-        }
-                
+            try{
+                LatLng coordStu = new LatLng(stuAtt.getLatitude().doubleValue() , stuAtt.getLongitude().doubleValue());
+                this.advancedModel.addOverlay(new Marker(coordStu, stuAtt.getPerson().getFirstName() + " " + stuAtt.getPerson().getLastName(),"xxx.png","https://maps.google.com/mapfiles/ms/micons/yellow-dot.png"));                
+               }        
+             catch (Exception e)
+                {
+                  continue;
+                }
+         }   
+           
 
     }
   
