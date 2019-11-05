@@ -30,11 +30,15 @@ import jpa.Person;
 import util.ISSAE_Util;
 import com.google.gson.Gson; 
 import com.google.gson.JsonParser;
+import ejb.AttParametersFacade;
 import java.io.StringWriter;
 import java.io.Writer;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonWriter;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
+import jpa.AttParameters;
 
 
 /**
@@ -217,6 +221,13 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         Date currentDate = new Date(); 
         
+        List<AttParameters> attParameters;
+        attParameters = em.createNamedQuery(
+            "AttParameters.findByActiveFlg", AttParameters.class)
+            .setParameter("activeFlg", 1)
+            .getResultList();
+        String googleMapsApi = attParameters.get(0).getGoogleMapsApi();
+        
         for (int i = 0; i < attList.size(); i++) {
            //System.out.println(attList.get(i));
            if (attList.get(i).getLecture().getDate().compareTo(currentDate) > 0)      
@@ -224,8 +235,10 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
                 .add(Json.createObjectBuilder()
                     .add("attendance_id", attList.get(i).getAttendance_id())
                     .add("date", attList.get(i).getLecture().getDateFormated())
+                    .add("course", attList.get(i).getLecture().getCourse().getCourseName())
                     .add("period", attList.get(i).getLecture().getPeriod().getPeriodDesc(attList.get(i).getLecture().getDate()))
                     .add("classroom", attList.get(i).getLecture().getClassroom().getClassroomName())
+                    .add("googleapikey", googleMapsApi)
                     );
 
        }        
