@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V2</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+    <script type="text/javascript">
+	
+	function CheckInByAttendance() {
+		var xhttp = new XMLHttpRequest();
+		//xhttp.onreadystatechange = function() {
+		//	 if (this.readyState == 4 && this.status == 200) {
+		//		 alert(this.responseText);
+		//	 }
+		//};
+		
+		//alert("http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance2/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value);
+		
+		//xhttp.open("GET", "http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance2/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value, true);
+		xhttp.open("GET", "http://localhost:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance2/mazen/mazenmazen", true);
+		
+		xhttp.send();
+	   
+		xhttp.onreadystatechange = function() {alert("1:" + xhttp.responseJSON + "/" + xhttp.responseText + "/" + xhttp.status + "/" + xhttp.readyState);
+			 if (this.readyState == 4 && this.status == 200) {
+				 alert(xhttp.responseText);
+			 }
+				 alert("4:" + xhttp.responseText);
+				 //jsonResponse = req.responseJSON
+		};
+
+		xhttp.onload = function() { alert("2:" + this.responseText + "/" + this.status + "/" + this.readyState);
+		  if (this.status >= 200 && this.status < 400) {
+			// Success!
+			var str = this.response;
+			var res = str.substring(0, 1);
+            if (res =="["){
+			  //call attendance list page 
+			  window.open("attendancelist.html?Email="+document.getElementById("Email").value+"&Password="+document.getElementById("Password").value + "&attList="+str,"_self");
+			}
+			else {
+			  alert(str);
+			}
+			//var data = JSON.parse(this.response);
+		  } else {
+			// We reached our target server, but it returned an error
+            alert("unable to reach server");
+		  }
+		};
+
+		xhttp.onerror = function() {alert("3:" + this.responseJSON + "/" + this.status + "/" + this.readyState);
+		  // There was a connection error of some sort
+		  alert("connection error");
+		};
+	 
+		//alert(window.location.protocol + "//" + window.location.host+"/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value);
+	    }
+	
+
+	</script>
+
+</head>
+<body>
+	
+
+							<button onclick="CheckInByAttendance();">
+								Login
+							</button>
+	
+	
+</body>
+</html>

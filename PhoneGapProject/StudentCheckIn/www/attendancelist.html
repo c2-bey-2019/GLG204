@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Student Attendance List</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script type="text/javascript" src="cordova.js"></script>
+
+	<script type="text/javascript" language="javascript">
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+	function openCheckInWindow(Email,Password,attId,lectureDate,lecturePeriod,lectureClass,course,googleAPIKey) {
+	alert(1);
+    	//window.open("checkin.html","_self");
+		//window.location.replace("checkin.html");
+        //alert(2);
+    
+	
+    	//window.open("checkin.html?" + "Email="+Email + "&Password="+Password + "&attId="+attId + "&lectureDate="+lectureDate + "&lecturePeriod="+lecturePeriod + "&lectureClass="+lectureClass + "&course="+course + "&googleAPIKey="+googleAPIKey,"_self");
+        //window.open("checkin.html?" + "Email="+Email + "&Password="+Password + "&attId="+attId + "&lectureDate="+lectureDate + "&lecturePeriod="+lecturePeriod + "&lectureClass="+lectureClass + "&course="+course + "&googleAPIKey="+googleAPIKey,"_self");
+	}
+
+	function displayData() {
+			//alert("0");
+			var attList = getParameterByName('attList');
+			//alert("attList = "+ attList);
+			var data = JSON.parse('[{"attendance_id": 1,"date": "01/01/2019","period": "5:00PM=>6:45PM","classroom": "class 305"},'+
+            '{"attendance_id": 1,"date": "01/01/2019","period": "5:00PM=>6:45PM","classroom": "class 305"}]');
+		   //alert("1");
+
+		   drawTable(JSON.parse(attList));	
+		   //drawTable(data);	
+		   //alert("2");
+		}
+
+		function drawTable(data) {
+			var rows = "";
+
+			for (var i = 0; i < data.length; i++) {
+			//alert("data.length="+data.length+" i="+i);
+				rows = rows + drawRow(data[i]);
+			}
+			 //alert("rows="+rows);
+			document.getElementById("attendanceTable").innerHTML = "<table>"+rows+"</table>";
+		}
+
+		function drawRow(rowData) {
+		   //alert("3");
+			var row = "<tr width='100%'>";
+		   //alert("4");
+		   
+			//row = row + "<td>" + rowData.course + "</td>";
+			//row = row + "<td>" + rowData.date + "</td>";
+			//row = row + "<td>" + rowData.period + "</td>";
+			//row = row + "<td>" + rowData.classroom + "</td>";
+
+			row = row + "<td width='100%'>";
+			
+			row = row + '<tr><td width="25%">Cours</td><td width="75%"><input type="text" id="Course" name="Course" value="' + rowData.course + '" disabled></td></tr>';
+			row = row + '<tr><td width="25%">Date</td><td width="75%"><input type="text" id="LectureDate" name="LectureDate" value="' + rowData.date + '" disabled></td></tr>';
+			row = row + '<tr><td width="25%">Période</td width="75%"><td><input type="text" id="LecturePeriod" name="LecturePeriod" value="' + rowData.period + '" disabled></td></tr>';
+			row = row + '<tr><td width="25%">Classe</td width="75%"><td><input type="text" id="LectureClass" name="LectureClass" value="' + rowData.classroom + '" disabled></td></tr>';
+
+			row = row + "</td>";
+			
+			//row = row + "<td>";
+			//row = row + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div><button onclick="window.open(\'checkin.html?Email='+ getParameterByName('Email') + '&Password='+ getParameterByName('Password') + '&attId='+ rowData.attendance_id + '&lectureDate='+ rowData.date + '&lecturePeriod='+ rowData.period + '&lectureClass='+ rowData.classroom + '&course='+ rowData.course + '&googleAPIKey='+ rowData.googleapikey + '\',\'_self\')"><img src="images/icons/forward.png"></button></div>';
+			//row = row + "</td>";
+			
+			////row = row + "<td align='center'>" + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div>'+
+			////            '<button class="login100-form-btn" onclick="openCheckInWindow(\'' + getParameterByName('Email') + '\',\'' + getParameterByName('Password') + '\',\'' + rowData.attendance_id + '\',\'' + rowData.date + '\',\'' + rowData.period + '\',\'' + rowData.classroom  + '\',\'' + rowData.course + '\',\'' + rowData.googleapikey + '\')">CheckIn</button>' + "</td></div>";
+			row = row + "<tr width='100%'><td width='1%'></td><td>" + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div>'+
+			            '<button class="login100-form-btn" onclick="window.open(\'checkin.html?Email='+ getParameterByName('Email') + '&Password='+ getParameterByName('Password') + '&attId='+ rowData.attendance_id + '&lectureDate='+ rowData.date + '&lecturePeriod='+ rowData.period + '&lectureClass='+ rowData.classroom + '&course='+ rowData.course + '&googleAPIKey='+ rowData.googleapikey + '\',\'_self\')">CheckIn</button>' + "</div></td></tr>";
+			
+			row = row + "</tr>";
+		   //alert("row="+row);
+			return row;
+		}
+
+
+	</script>
+
+</head>
+<body onload="displayData();">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+					<div class="container-login100-form-btn">
+							<table id="attendanceTable">
+							 <tr><td>test</td></tr>
+							</table>	
+						
+					</div>
+			</div>
+		</div>
+	</div>
+		 
+
+</body>
+</html>
