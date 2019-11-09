@@ -38,6 +38,7 @@
         margin: 0;
         padding: 0;
       }
+	
     </style>
     <script type="text/javascript" src="cordova.js"></script>
 
@@ -84,13 +85,13 @@
 			//alert("data.length="+data.length+" i="+i);
 				rows = rows + drawRow(data[i]);
 			}
-			 //alert("rows="+rows);
-			document.getElementById("attendanceTable").innerHTML = "<table>"+rows+"</table>";
+			//alert("rows="+rows);
+			document.getElementById("attendanceTable").innerHTML = rows;
 		}
 
 		function drawRow(rowData) {
 		   //alert("3");
-			var row = "<tr width='100%'>";
+			var row = "<tr >";
 		   //alert("4");
 		   
 			//row = row + "<td>" + rowData.course + "</td>";
@@ -98,14 +99,14 @@
 			//row = row + "<td>" + rowData.period + "</td>";
 			//row = row + "<td>" + rowData.classroom + "</td>";
 
-			row = row + "<td width='100%'>";
+			//row = row + "<td>";
 			
-			row = row + '<tr><td width="25%">Cours</td><td width="75%"><input type="text" id="Course" name="Course" value="' + rowData.course + '" disabled></td></tr>';
-			row = row + '<tr><td width="25%">Date</td><td width="75%"><input type="text" id="LectureDate" name="LectureDate" value="' + rowData.date + '" disabled></td></tr>';
-			row = row + '<tr><td width="25%">Période</td width="75%"><td><input type="text" id="LecturePeriod" name="LecturePeriod" value="' + rowData.period + '" disabled></td></tr>';
-			row = row + '<tr><td width="25%">Classe</td width="75%"><td><input type="text" id="LectureClass" name="LectureClass" value="' + rowData.classroom + '" disabled></td></tr>';
+	//		row = row + '<tr><td width="10%"></td><td width="25%">Cours</td><td width="55%"><input type="text" id="Course" name="Course" value="' + rowData.course + '" disabled></td><td width="10%"></td></tr>';
+	//		row = row + '<tr><td width="10%"></td><td width="25%">Date</td><td width="55%"><input type="text" id="LectureDate" name="LectureDate" value="' + rowData.date + '" disabled></td><td width="10%"></td></tr>';
+	//		row = row + '<tr><td width="10%"></td><td width="25%">Période</td width="55%"><td><input type="text" id="LecturePeriod" name="LecturePeriod" value="' + rowData.period + '" disabled></td><td width="10%"></td></tr>';
+	//		row = row + '<tr><td width="10%"></td><td width="25%">Classe</td width="55%"><td><input type="text" id="LectureClass" name="LectureClass" value="' + rowData.classroom + '" disabled></td><td width="10%"></td></tr>';
 
-			row = row + "</td>";
+			//row = row + "</td>";
 			
 			//row = row + "<td>";
 			//row = row + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div><button onclick="window.open(\'checkin.html?Email='+ getParameterByName('Email') + '&Password='+ getParameterByName('Password') + '&attId='+ rowData.attendance_id + '&lectureDate='+ rowData.date + '&lecturePeriod='+ rowData.period + '&lectureClass='+ rowData.classroom + '&course='+ rowData.course + '&googleAPIKey='+ rowData.googleapikey + '\',\'_self\')"><img src="images/icons/forward.png"></button></div>';
@@ -113,8 +114,18 @@
 			
 			////row = row + "<td align='center'>" + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div>'+
 			////            '<button class="login100-form-btn" onclick="openCheckInWindow(\'' + getParameterByName('Email') + '\',\'' + getParameterByName('Password') + '\',\'' + rowData.attendance_id + '\',\'' + rowData.date + '\',\'' + rowData.period + '\',\'' + rowData.classroom  + '\',\'' + rowData.course + '\',\'' + rowData.googleapikey + '\')">CheckIn</button>' + "</td></div>";
-			row = row + "<tr width='100%'><td width='1%'></td><td>" + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div>'+
-			            '<button class="login100-form-btn" onclick="window.open(\'checkin.html?Email='+ getParameterByName('Email') + '&Password='+ getParameterByName('Password') + '&attId='+ rowData.attendance_id + '&lectureDate='+ rowData.date + '&lecturePeriod='+ rowData.period + '&lectureClass='+ rowData.classroom + '&course='+ rowData.course + '&googleAPIKey='+ rowData.googleapikey + '\',\'_self\')">CheckIn</button>' + "</div></td></tr>";
+
+
+			row = row + '<tr ><td style="background-color: #eee" width="25%">Cours: </td><td   width="75%"> '+ rowData.course+'</td><td width="25%"></td></tr>';
+			row = row + '<tr ><td style="background-color: #eee" width="25%">Date: </td><td   width="75%"> '+ rowData.date+'</td><td width="25%"></td></tr>';
+			row = row + '<tr ><td style="background-color: #eee" width="25%">Période: </td><td   width="75%"> '+ rowData.period+'</td><td width="25%"></td></tr>';
+			row = row + '<tr ><td style="background-color: #eee" width="25%">Classe: </td><td   width="75%"> '+ rowData.classroom+'</td><td width="25%"></td></tr>';
+
+
+			row = row + "<tr><td width='25%'></td><td style='border-spacing: 5px'>" + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div>'+
+			            '<button class="login100-form-btn" onclick="window.open(\'checkin.html?Email='+ getParameterByName('Email') + '&Password='+ getParameterByName('Password') + '&attId='+ rowData.attendance_id + '&lectureDate='+ rowData.date + '&lecturePeriod='+ rowData.period + '&lectureClass='+ rowData.classroom + '&course='+ rowData.course + '&googleAPIKey='+ rowData.googleapikey + '&serverUrl=' + getParameterByName('serverUrl') + '\',\'_self\')">CheckIn</button>' + "</div></td><td width='25%'></td></tr>";
+			//row = row + "<tr width='100%'><td width='10%'></td><td width='1%'></td><td>" + '<div class="wrap-login100-form-btn"><div class="login100-form-bgbtn"></div>'+
+			 //           '<button class="login100-form-btn" onclick="window.open(\'checkin.html?Email='+ getParameterByName('Email') + '&Password='+ getParameterByName('Password') + '&attId='+ rowData.attendance_id + '&lectureDate='+ rowData.date + '&lecturePeriod='+ rowData.period + '&lectureClass='+ rowData.classroom + '&course='+ rowData.course + '&googleAPIKey='+ rowData.googleapikey + '&serverUrl=' + getParameterByName('serverUrl') + '\',\'_self\')">CheckIn</button>' + "</div></td><td width='10%'></td></tr>";
 			
 			row = row + "</tr>";
 		   //alert("row="+row);
@@ -128,10 +139,12 @@
 <body onload="displayData();">
 	<div class="limiter">
 		<div class="container-login100">
+		   
 			<div class="wrap-login100">
+			         <h4>Présence à l'ISSAE</h4>
 					<div class="container-login100-form-btn">
-							<table id="attendanceTable">
-							 <tr><td>test</td></tr>
+							<table  style="width:100%" id="attendanceTable">
+							 
 							</table>	
 						
 					</div>
