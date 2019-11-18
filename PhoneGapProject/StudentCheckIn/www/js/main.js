@@ -87,10 +87,9 @@
 		//	 }
 		//};
 		
-		//alert("http://192.168.1.70:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance2/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value);
+		//alert(document.getElementById("serverUrl").innerHTML.trim() + "/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value);
 		
-		xhttp.open("GET", "http://192.168.1.70:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value, true);
-		//xhttp.open("GET", "http://192.168.1.70:8080/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance2/mazen/mazenmazen", true);
+		xhttp.open("GET", document.getElementById("serverUrl").innerHTML.trim() + "/CNAMAttendance/webresources/ISSAEServices/getStudentAttendance/"+document.getElementById("Email").value+"/"+document.getElementById("Password").value, true);
 		
 		xhttp.send();
 	   
@@ -102,14 +101,15 @@
 	//			 //jsonResponse = req.responseJSON
 	//  	};
 
-		xhttp.onload = function() { alert("2:" + this.responseText + "/" + this.status + "/" + this.readyState);
+		xhttp.onload = function() { 
+		  //alert("2:" + this.responseText + "/" + this.status + "/" + this.readyState);
 		  if (this.status >= 200 && this.status < 400) {
 			// Success!
 			var str = this.response;
 			var res = str.substring(0, 1);
             if (res =="["){
 			  //call attendance list page 
-			  window.open("attendancelist.html?Email="+document.getElementById("Email").value+"&Password="+document.getElementById("Password").value + "&attList="+str,"_self");
+			  window.open("attendancelist.html?Email="+document.getElementById("Email").value+"&Password="+document.getElementById("Password").value + "&attList="+str + "&serverUrl="+ document.getElementById("serverUrl").innerHTML,"_self");
 			}
 			else {
 			  alert(str);
@@ -117,11 +117,12 @@
 			//var data = JSON.parse(this.response);
 		  } else {
 			// We reached our target server, but it returned an error
-            alert("unable to reach server");
+            alert("unable to reach server >>responseText:" + this.responseText + "status:" + this.status + ";readyState:" + this.readyState);
 		  }
 		};
 
-		xhttp.onerror = function() {alert("3:" + this.responseJSON + "/" + this.status + "/" + this.readyState);
+		xhttp.onerror = function() {
+		  //alert("3:" + this.responseJSON + "/" + this.status + "/" + this.readyState);
 		  // There was a connection error of some sort
 		  alert("connection error");
 		};
@@ -152,3 +153,15 @@
 
 
 })(jQuery);
+
+function requestListener() {//alert(this.responseText);
+	document.getElementById("serverUrl").innerHTML =  this.responseText;
+ };
+
+onload = function() {//alert(1);
+  var request = new XMLHttpRequest();
+  request.onload = requestListener;//alert(1.2);
+  request.open("GET", "resource/config.properties", true);//alert(1.5);
+  request.send();//alert(2);
+ //alert(this.responseText);
+};
