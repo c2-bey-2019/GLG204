@@ -363,7 +363,7 @@ public class AttendanceBean implements Serializable
     public StudentsMarkersOnMap getStudentsMarkersOnMap() {
         this.submit();
         this.studentsMarkersOnMap = new StudentsMarkersOnMap();
-        this.studentsMarkersOnMap.Refresh(this.getStudentsByAttendance());
+        this.studentsMarkersOnMap.Refresh(this.getStudentsCheckedInByAttendance());
         return this.studentsMarkersOnMap;
     }
 
