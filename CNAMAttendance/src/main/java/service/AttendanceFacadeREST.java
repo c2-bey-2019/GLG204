@@ -262,6 +262,43 @@ public class AttendanceFacadeREST extends AbstractFacade<Attendance> {
     }
     
     
+    @GET
+    @Path("/getStudentAttendance2/{email}/{password}")
+    @Consumes({MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public List<Attendance> getStudentAttendance2(@PathParam("email") String email, @PathParam("password") String passWord) {
+        
+        
+        List<Person> persons;
+        persons = em.createQuery("SELECT p from Person p where locate(:filt, p.email) > 0")
+                    .setParameter("filt",email)
+                    .getResultList();
+        
+        
+    
+          
+        List<Attendance> attList;
+        attList = em.createQuery("SELECT a FROM Attendance a JOIN Person p ON p.person_id=a.person.person_id JOIN Lecture l ON l.lecture_id=a.lecture.lecture_id WHERE p.person_id = ?1 ORDER BY p.firstName")
+                    .setParameter(1,persons.get(0).getPerson_id())
+                    .getResultList();
+        
+        JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
+        Date currentDate = new Date(); 
+        
+        List<AttParameters> attParameters;
+        attParameters = em.createNamedQuery(
+            "AttParameters.findByActiveFlg", AttParameters.class)
+            .setParameter("activeFlg", 1)
+            .getResultList();
+ 
+
+        return attList;
+        
+        
+
+        
+    
+    }
     
     @Override
     protected EntityManager getEntityManager() {
