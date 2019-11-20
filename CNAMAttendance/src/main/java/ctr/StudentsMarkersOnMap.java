@@ -33,7 +33,7 @@ public class StudentsMarkersOnMap implements Serializable
 {
 
     //private MapModel advancedModel;
-    private final static MapModel advancedModel = new DefaultMapModel();
+    private /*final static*/ MapModel advancedModel = new DefaultMapModel();
 
   
     private Marker marker;
@@ -56,6 +56,8 @@ public class StudentsMarkersOnMap implements Serializable
 
    }
     public void Refresh(List<Attendance> studentsByAttendance) {
+        //advancedModel = new DefaultMapModel();
+        
         this.init();
   
         for (Attendance stuAtt : studentsByAttendance) {
